@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .add {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            color: #ccc;
+            border: 2px dashed;
+        }
+
+        .add:before {
+            border-top: 10px solid;
+        }
+
+        .add:after {
+            border-left: 10px solid;
+        }
+
+        /* hover 变色 */
+        .add:hover {
+            color: #06C;
+        }
+    </style>
+</head>
+
+<body>
+    <a class="add">
+        +
+    </a>
+</body>
+
+</html>
