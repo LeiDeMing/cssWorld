@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <span id="vAlign">字母x</span><img src="/images/common/m/1.jpg" width="128" height="92">
+    <p>文字的vertical-align值：<select id="select">
+            <option value="baseline">baseline</option>
+            <option value="10px">10px</option>
+            <option value="-10px">-10px</option>
+            <option value="1em">1ex</option>
+            <option value="-1em">-1ex</option>
+            <option value="50%">50%</option>
+            <option value="-50%">-50%</option>
+        </select></p>
+    <script>
+        var eleSelect = document.getElementById('select');
+        var eleValign = document.getElementById('vAlign');
+
+        if (eleSelect && eleValign) {
+            eleSelect.onchange = function () {
+                eleValign.style.verticalAlign = this.value;
+            };
+        }
+    </script>
+</body>
+
+</html>
