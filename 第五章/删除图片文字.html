@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            line-height: 20px;
+        }
+
+        .icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            white-space: nowrap;
+            letter-spacing: -1em;
+            text-indent: -999em;
+        }
+
+        .icon:before {
+            content: '\3000';
+        }
+
+        .icon-delete {
+            background: url('https://demo.cssworld.cn/images/5/delete.png') no-repeat center;
+        }
+
+        .large {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h4>1. 空标签后面跟随文本</h4>
+        <p><i class="icon icon-delete"></i>删除</p>
+        <h4>2. 标签里面有“删除”文本</h4>
+        <p><i class="icon icon-delete">删除</i>随便什么文字</p>
+        <h4>3. 字号变大</h4>
+        <p class="large">
+            <i class="icon icon-delete"></i>删除
+        </p>
+        <p class="large">
+            <i class="icon icon-delete">删除</i>随便什么文字
+        </p>
+    </div>
+</body>
+
+</html>
