@@ -34,7 +34,9 @@
 > 所谓“宽度分离原则”，就是 CSS 中的 width 属性不与影响宽度的 padding/border（有时候包括 margin）属性共存，也就是不能出现以下的组合
 
     .box { width: 100px; border: 1px solid; }
-    
+
 或者
 
     .box { width: 100px; padding: 20px; }
+
+### 改变 width/height 作用细节的 box-sizing
