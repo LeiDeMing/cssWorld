@@ -40,3 +40,4 @@
     .box { width: 100px; padding: 20px; }
 
 ### 改变 width/height 作用细节的 box-sizing
+> box-sizing 就是改变尺寸作用规则的
