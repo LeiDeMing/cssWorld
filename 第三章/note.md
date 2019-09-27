@@ -45,3 +45,10 @@
 #### 如何评价*{box-sizing:border-box}
 + （1）这种做法易产生没必要的消耗
 + （2）这种做法并不能解决所有问题
+
+#### box-sizing 发明的初衷
+> box-sizing 被发明出来最大的初衷应该是解决替换元素宽度自适应问题
+
+    input, textarea, img, video, object { 
+        box-sizing: border-box; 
+    }
