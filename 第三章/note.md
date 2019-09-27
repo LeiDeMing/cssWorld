@@ -71,4 +71,22 @@
 + （1）min-wdith/height 值为 auto 合法
 + （2）数值变化无动画
 
-### 3.3 超越!important，超越最大
+#### 3.3 超越!important，超越最大
++ 1．超越!important
+> 超越!important 指的是 max-width 会覆盖 width，而且这种覆盖不是普通的覆盖，是超级覆盖，覆盖到什么程度呢？大家应该都知道 CSS 世界中的!important 的权重相当高，在业界，往往会把!important 的权重比成“泰坦尼克”，比直接在元素的 style 属性中设置 CSS 声明还要高，一般用在 CSS 覆盖 JavaScript 设置上。但是，就是这么厉害的!important，直接被 max-width 一个浪头就拍沉了
+
++ 2．超越最大
+> 超越最大指的是min-width覆盖max-width，此规则发生在min-width和max-width冲突的时候
+
+#### 3.3.4 任意高度元素的展开收起动画技术
+
+    .element { 
+        max-height: 0; 
+        overflow: hidden; 
+        transition: max-height .25s; 
+    } 
+    .element.active { 
+        max-height: 666px; /* 一个足够大的最大高度值 */ 
+    }
+
+> 建议 max-height 使用足够安全的最小值，这样，收起时即使有延迟，也会因为时间很短，很难被用户察觉，并不会影响体验
