@@ -41,3 +41,7 @@
 
 ### 改变 width/height 作用细节的 box-sizing
 > box-sizing 就是改变尺寸作用规则的
+
+#### 如何评价*{box-sizing:border-box}
++ （1）这种做法易产生没必要的消耗
++ （2）这种做法并不能解决所有问题
