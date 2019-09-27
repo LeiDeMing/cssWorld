@@ -65,3 +65,10 @@
 在内，但是，非绝对定位元素则是相对于 content box 计算的
 
 ### 3.3 CSS min-width/max-width和min-height/max-height二三事
+
+#### 3.3.2 与众不同的初始值
+
++ （1）min-wdith/height 值为 auto 合法
++ （2）数值变化无动画
+
+### 3.3 超越!important，超越最大
