@@ -52,3 +52,6 @@
     input, textarea, img, video, object { 
         box-sizing: border-box; 
     }
+
+### 关于 height:100%
++ height 和 width 还有一个比较明显的区别就是对百分比单位的支持。对于 width 属性，就算父元素 width 为 auto，其百分比值也是支持的；但是，对于 height 属性，如果父元素height 为 auto，只要子元素在文档流中，其百分比值完全就被忽略了
