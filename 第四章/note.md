@@ -28,6 +28,8 @@
 > + 不能左右:empty 伪类。:empty 是一个 CSS 选择器，当元素里面无内容的时候进行匹配
 > + content 动态生成值无法获取。content 是一个非常强大的 CSS 属性，其中一个强大之处就是计数器效果，可以自动累加数值
 
+#### content 内容生成技术
+> 在实际项目中，content 属性几乎都是用在::before/::after 这两个伪元素中，因此，“content 内容生成技术”有时候也称为“::before/::after 伪元素技术”。
 
 ### 温和的 padding 属性
 #### padding 与元素的尺寸
@@ -138,3 +140,5 @@
         background-color: currentColor; 
         background-clip: content-box; 
     }
+
+### 激进的 margin 属性
