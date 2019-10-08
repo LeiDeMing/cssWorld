@@ -66,3 +66,75 @@
 
 #### padding 的百分比值
 + padding 百分比值无论是水平方向还是垂直方向均是相对于宽度计算的
++ 网页开发的时候经常会有横贯整个屏幕的头图效果，我们通常的做法是定高，如 200 像素高，屏幕小的时候图片两侧内容隐藏。然而，这种实现有一个问题，就是类似笔记本这样的小屏幕，头图高度过高会导致下面主体内容可能一屏都实现不了，但是，如果我们使用 padding 进行等比例控制，则小屏幕下头图高度天然等比例缩小，没有任何 JavaScript，却依然适配良好！例如：
+
+    .box { 
+        padding: 10% 50%; 
+        position: relative; 
+    } 
+    .box > img { 
+        position: absolute; 
+        width: 100%; height: 100%; 
+        left: 0; top: 0; 
+    }
+
++ 上面百分比值是应用在具有块状特性的元素上的，如果是内联元素，会有怎样的表现呢？
+> + 同样相对于宽度计算；
+> + 默认的高度和宽度细节有差异；
+> + padding 会断行。
++ 我们先来看一下内联元素的 padding 断行，代码如下：
+
+    .box { 
+        border: 2px dashed #cd0000; 
+    } 
+    span { 
+        padding: 50%; 
+        background-color: gray; 
+    } 
+    \<span>内有文字若干\</span>
++ [图示](http://ww1.sinaimg.cn/large/0060ZzrAgy1g7qtcrosa2j304d05iq2q.jpg)对于内联元素，其 padding 是会断行的，也就是 padding 区域是跟着内联盒模型中的行框盒子走的，上面的例子由于文字比较多，一行显示不了，于是“若干”两字换到了下一行，于是，原本的 padding 区域也跟着一起掉下来了，根据后来居上的层叠规则，“内有”两字自
+然就正好被覆盖，于是看不见了；同时，规则的矩形区域因为换行，也变成了五条边；至于宽度和外部容器盒子不一样宽，那是自然的，如果没有任何文字内容，那自然宽度正好和容器一致；现在有“内有文字若干”这 6 个字，实际宽度是容器宽度和这 6 个字宽度的总和，换行后的宽度要想和容器宽度一样，那可真要靠极好的人品了
++ 事情还没完，我们再看一个现象，假如是空的内联元素，里面没有任何文字，仅有一个\<span>标签：\<span>内有文字若干\</span>,此时，我们会发现居然最终背景区域的宽度和高度是不相等的（[见图](http://ww1.sinaimg.cn/large/0060ZzrAgy1g7qte2uymmj304a0500p3.jpg)），这不科学啊！padding:50%相对宽度计算，应该出来是个正方形啊，为何高度要高出一截呢？
++ 原因其实很简单：内联元素的垂直 padding 会让“幽灵空白节点”显现，也就是规范中的“strut”出现。
+知道了原因，要解决此问题就简单了。由于内联元素默认的高度完全受 font-size 大小控制，因此，我们只要：
+
+    span { 
+        padding: 50%; 
+        font-size: 0; 
+        background-color: gray; 
+    }
+
+#### 标签元素内置的 padding
++ 1. ol/ul 列表内置 padding-left，但是单位是 px 不是 em
++ 2. 很多表单元素都内置 padding
+> + 所有浏览器\<input>/\<textarea>输入框内置 padding
+> + 所有浏览器\<button>按钮内置 padding
+> + 部分浏览器\<select>下拉内置 padding，如 Firefox、IE8 及以上版本浏览器可以设置padding
+> + 所有浏览器\<radio>/\<chexkbox>单复选框无内置 padding
+> + \<button>按钮元素的 padding 最难控制
+
+#### padding 与图形绘制
+> padding 属性和 background-clip 属性配合，可以在有限的标签下实现一些 CSS 图形绘制效果
+> 例 1：不使用伪元素，仅一层标签实现大队长的“三道杠”分类图标效果
+
+    .icon-menu { 
+        display: inline-block; 
+        width: 140px; height: 10px; 
+        padding: 35px 0; 
+        border-top: 10px solid; 
+        border-bottom: 10px solid; 
+        background-color: currentColor; 
+        background-clip: content-box; 
+    }
+
+> 例 2：不使用伪元素，仅一层标签实现双层圆点效果。此效果在移动端也比较常见
+
+    .icon-dot { 
+        display: inline-block; 
+        width: 100px; height: 100px; 
+        padding: 10px; 
+        border: 10px solid; 
+        border-radius: 50%; 
+        background-color: currentColor; 
+        background-clip: content-box; 
+    }
