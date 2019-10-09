@@ -143,7 +143,73 @@
 
 ### 激进的 margin 属性
 #### margin 与元素尺寸以及相关布局
-+ 元素尺寸的相关概念
++ 1. 元素尺寸的相关概念
 > + 元素尺寸:包括 padding和 border，也就是元素的 border box 的尺寸。在原生的 DOM API 中写作 offsetWidth和 offsetHeight，所以，有时候也成为“元素偏移尺寸”。
 > + 元素内部尺寸:包括 padding 但不包括 border，也就是元素的 padding box 的尺寸。在原生的 DOM API 中写作 clientWidth 和 clientHeight，所以，有时候也称为“元素可视尺寸”。
 > + 元素外部尺寸:不仅包括 padding 和 border，还包括 margin，也就是元素的 margin box 的尺寸。没有相对应的原生的 DOM API
+> + “外部尺寸”有个很不一样的特性，就是尺寸的大小有可能是负数，没错，负尺寸。这和我们现实世界对尺寸的认知明显冲突了，因为现实世界没有什么物体的尺寸是负的。所以，我总是把“外部尺寸”理解为“元素占据的空间尺寸”，把概念从“尺寸”转换到 “空间”，这时候就容易理解多了。
+
++ 2. margin 与元素的内部尺寸
+> + 只有元素是“充分利用可用空间”状态的时候，margin 才可以改变元素的可视尺寸,比方说，如下 CSS：
+    
+    .father { 
+        width: 300px; 
+        margin: 0 -20px; 
+    }
+
+> + 此时元素宽度还是 300 像素，尺寸无变化。因为只要宽度设定，margin 就无法改变元素尺寸，这和 padding 是不一样的
+> + 但是，如果是下面这样的 HTML 和 CSS：
+    
+    <div class="father"> 
+    <div class="son"></div> 
+    </div> 
+    .father { width: 300px; } 
+    .son { margin: 0 -20px; }
+
+> + 则.son 元素的宽度就是 340 像素了，尺寸通过负值设置变大了，因为此时的宽度表现是“充分利用可用空间”
+> + CSS 世界默认的流方向是水平方向，因此，对于普通流体元素，margin 只能改变元素水平方向尺寸；但是，对于具有拉伸特性的绝对定位元素，则水平或垂直方向都可以，因为此时的尺寸表现符合“充分利用可用空间”
+> + 我们还可以利用 margin 改变元素尺寸的特性来实现两端对齐布局效果,我们可以通过给父容器添加 margin 属性，增加容器的可用宽度来实现。
+
+    ul { 
+        margin-right: -20px; 
+    } 
+    ul > li { 
+        float: left; 
+        width: 100px; 
+        margin-right: 20px; 
+    }
+
++ 3. margin 与元素的外部尺寸
+> 对于普通块状元素，在默认的水平流下，margin 只能改变左右方向的内部尺寸，垂直方向则无法改变。如果我们使用 writing-mode 改变流向为垂直流，则水平方向内部尺寸无法改变，垂直方向可以改变。这是由 margin:auto 的计算规则决定的
+> + 如果容器可以滚动，在 IE 和 Firefox 浏览器下是会忽略 padding-bottom 值的，Chrome 等浏览器则不会。也就是说，在 IE 和 Firefox 浏览器下,底部没有 50 像素的 padding-bottom 间隙，
+
+    <div style="height:100px; padding:50px 0;">     
+        <img src="0.jpg" height="300"> 
+    </div>
+
+> + 此兼容性差异的本质区别在于：Chrome 浏览器是子元素超过 content box 尺寸触发滚动条显示，
+而 IE 和 Firefox 浏览器是超过 padding box 尺寸触发滚动条显示
+
+> + 但是，我们可以借助 margin 的外部尺寸特性来实现底部留白，代码如下：记住了，只能使用子元素的 margin-bottom 来实现滚动容器的底部留白。
+
+    <div style="height:200px;"> 
+        <img height="300" style="margin:50px 0;"> 
+    </div>
+
+> + 下面再举一个利用 margin 外部尺寸实现等高布局的经典案例。此布局多出现在分栏有背景色或者中间有分隔线的布局中，有可能左侧栏内容多，也有可能右侧栏内容多，但无论内容多少，两栏背景色都和容器一样高
+> + 由于height:100%需要在父级设定具体高度值时才有效，因此我们需要使用其他技巧来实现。方法其实很多，例如使用 display: 
+table-cell 布局，左右两栏作为单元格处理，或者使用 border 边框来模拟，再或者使用我们这里的 margin 负值实现，核心 CSS 代码如下：
+
+    .column-box { 
+        overflow: hidden; 
+    } 
+    .column-left, 
+    .column-right { 
+        margin-bottom: -9999px; 
+        padding-bottom: 9999px; 
+    }   
+
+> + 垂直方向 margin 无法改变元素的内部尺寸，但却能改变外部尺寸，这里我们设置了margin-bottom:-9999px 意味着元素的外部尺寸在垂直方向上小了 9999px。默认情况下，垂直方向块级元素上下距离是 0，一旦 margin-bottom:-9999px 就意味着后面所有元素和上面元素的空间距离变成了-9999px，也就是后面元素都往上移动了 9999px。此时，通过神来一笔padding-bottom:9999px 增加元素高度，这正负一抵消，对布局层并无影响，但却带来了我们需要的东西—视觉层多了 9999px 高度的可使用的背景色。但是，9999px 太大了，所以需要配合父级 overflow:hidden 把多出来的色块背景隐藏掉，于是实现了视觉上的等高布局效果。
+> + 本例中，padding-bottom:9999px 也可以用 border-bottom: 9999px solid transparent 代替，不过 IE7 以上浏览器才支持。
+
+#### margin 的百分比值
