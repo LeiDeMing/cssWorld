@@ -142,3 +142,8 @@
     }
 
 ### 激进的 margin 属性
+#### margin 与元素尺寸以及相关布局
++ 元素尺寸的相关概念
+> + 元素尺寸:包括 padding和 border，也就是元素的 border box 的尺寸。在原生的 DOM API 中写作 offsetWidth和 offsetHeight，所以，有时候也成为“元素偏移尺寸”。
+> + 元素内部尺寸:包括 padding 但不包括 border，也就是元素的 padding box 的尺寸。在原生的 DOM API 中写作 clientWidth 和 clientHeight，所以，有时候也称为“元素可视尺寸”。
+> + 元素外部尺寸:不仅包括 padding 和 border，还包括 margin，也就是元素的 margin box 的尺寸。没有相对应的原生的 DOM API
