@@ -213,3 +213,132 @@ table-cell 布局，左右两栏作为单元格处理，或者使用 border 边�
 > + 本例中，padding-bottom:9999px 也可以用 border-bottom: 9999px solid transparent 代替，不过 IE7 以上浏览器才支持。
 
 #### margin 的百分比值
+> 和 padding 属性一样，margin 的百分比值无论是水平方向还是垂直方向都是相对于宽度计算的。
+
+#### 正确看待 CSS 世界里的 margin 合并
++ 1. 什么是 margin 合并
+> + 块级元素的上外边距（margin-top）与下外边距（margin-bottom）有时会合并为单个外边距，这样的现象称为“margin 合并”。从此定义上，我们可以捕获两点重要的信息
+> + > （1）块级元素，但不包括浮动和绝对定位元素，尽管浮动和绝对定位可以让元素块状化。
+> + > （2）只发生在垂直方向，需要注意的是，这种说法在不考虑 writing-mode 的情况下才是正确的，严格来讲，应该是只发生在和当前文档流方向的相垂直的方向上。由于默认文档流是水平流，因此发生 margin 合并的就是垂直方向。
++ 2. margin 合并的 3 种场景
+> + （1）相邻兄弟元素 margin 合并。这是 margin 合并中最常见、最基本的，例如：则第一行和第二行之间的间距还是 1em，因为第一行的 margin-bottom 和第二行的margin-top 合并在一起了，并非上下相加。
+
+    p { margin: 1em 0; } 
+    <p>第一行</p>
+    <p>第二行</p>
+
+> + （2）父级和第一个/最后一个子元素。我们直接看例子，在默认状态下，下面 3 种设置是等效的：在实际开发的时候，给我们带来麻烦的多半就是这里的父子 margin 合并。
+
+    <div class="father"> 
+        <div class="son" style="margin-top:80px;"></div> 
+    </div> 
+    <div class="father" style="margin-top:80px;"> 
+        <div class="son"></div> 
+    </div> 
+    <div class="father" style="margin-top:80px;"> 
+        <div class="son" style="margin-top:80px;"></div> 
+    </div>
+> 对于 margin-top 合并，可以进行如下操作（满足一个条件即可）：
+> + 父元素设置为[块状格式化上下](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context)文元素；
+> + 父元素设置 border-top 值；
+> + 父元素设置 padding-top 值；
+> + 父元素和第一个子元素之间添加内联元素进行分隔。
+
+> 对于 margin-bottom 合并，可以进行如下操作（满足一个条件即可）：
+> + 父元素设置为[块状格式化上下](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context)元素；
+> + 父元素设置 border-bottom 值；
+> + 父元素设置 padding-bottom 值；
+> + 父元素和最后一个子元素之间添加内联元素进行分隔；
+> + 父元素设置 height、min-height 或 max-height。
+
+> + （3）空块级元素的 margin 合并。例如，下面 CSS 和 HTML 代码：
+
+    .father { overflow: hidden; } 
+    .son { margin: 1em 0; } 
+    <div class="father"> 
+    <div class="son"></div> 
+    </div>
+
+> + > 比方说，我们一开始的“相邻兄弟元素 margin 合并”，其实，就算兄弟不相邻，也是可以发生合并的，前提是中间插手的也是个会合并的家伙。比方说：
+
+    p { margin: 1em 0; } 
+    <p>第一行</p>
+    <div></div>
+    <p>第二行</p>
+
+> + > 此时第一行和第二行之间的距离还是 1em，中间看上去隔了一个\<div>元素，但对最终效果却没有任何影响。如果非要细究，则实际上这里发生了 3 次 margin 合并，\<div>和第一行\<p>的 margin-bottom 合并，然后和第二行\<p>的 margin-top 合并，这两次合并是相邻兄弟合并。由于自身是空\<div>，于是前两次合并的 margin-bottom 和 margin-top 再次合并，这次合并是空块级元素合并，于是最终间距还是 1em。
+> + > 如果有人不希望空\<div>元素有 margin 合并，可以进行如下操作：
+> + > + 设置垂直方向的 border；
+> + > + 设置垂直方向的 padding；
+> + > + 里面添加内联元素（直接 Space 键空格是没用的）；
+> + > + 设置 height 或者 min-height。
+
++ 2. margin 合并的计算规则
+> 我把 margin 合并的计算规则总结为“正正取大值”“正负值相加”“负负最负值”3 句话
+> + （1）正正取大值。如果是相邻兄弟合并：此时.a 和.b 两个\<div>之间的间距是 50px，取大的那个值。
+    
+    .a { margin-bottom: 50px; } 
+    .b { margin-top: 20px; } 
+    <div class="a"></a> 
+    <div class="b"></a>
+> + > 如果是父子合并：此时.father 元素等同于设置了 margin-top:50px，取大的那个值。
+
+    .father { margin-top: 20px; } 
+    .son { margin-top: 50px; } 
+    <div class="father">
+        <div class="son"></div> 
+    </div>
+
+> + > 如果是自身合并：则此时.a 元素的外部尺寸是 50px，取大的那个值。
+
+    .a { 
+        margin-top: 20px; 
+        margin-bottom: 50px; 
+    } 
+    <div class="a"></div>
+
+> + （2）正负值相加。如果是相邻兄弟合并：此时.a 和.b 两个<div>之间的间距是 30px，是-20px+50px 的计算值。
+
+    .a { margin-bottom: 50px; } 
+    .b { margin-top: -20px; } 
+    <div class="a"></a> 
+    <div class="b"></a>
+
+> + > 如果是父子合并：此时.father 元素等同于设置了 margin-top:30px，是-20px+50px 的计算值。
+
+    .father { margin-top: -20px; } 
+    .son { margin-top: 50px; } 
+    <div class="father"> 
+        <div class="son"></div> 
+    </div>
+
+> + > 如果是自身合并：则此时.a 元素的外部尺寸是 30px，是-20px+50px 的计算值。
+
+    .a { 
+        margin-top: -20px; 
+        margin-bottom: 50px; 
+    } 
+    <div class="a"></div>
+
+> + （3）负负最负值。如果是相邻兄弟合并：此时.a 和.b 两个<div>之间的间距是-50px，取绝对负值最大的值。
+
+    .a { margin-bottom: -50px; } 
+    .b { margin-top: -20px; } 
+    <div class="a"></a> 
+    <div class="b"></a>
+
+> + > 如果是父子合并：此时.father 元素等同于设置了 margin-top:-50px，取绝对负值最大的值。
+
+    .father { margin-top: -20px; } 
+    .son { margin-top: -50px; }
+    <div class="father"> 
+        <div class="son"></div> 
+    </div>
+
+> + > 如果是自身合并：则此时.a 元素的外部尺寸是-50px，取绝对负值最大的值。
+
+    .a { 
+        margin-top: -20px; 
+        margin-bottom: -50px; 
+    } 
+    <div class="a"></div>
