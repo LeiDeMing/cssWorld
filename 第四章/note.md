@@ -362,6 +362,7 @@ table-cell 布局，左右两栏作为单元格处理，或者使用 border 边�
 
 #### 深入理解 CSS 中的 margin:auto
 > 首先，我们需要知道下面这些事实。
+> margin 属性的auto 计算就是为块级元素左中右对齐而设计的，和内联元素使用 text-align 控制左中右对齐正好遥相呼应！
 > + 有时候元素就算没有设置 width 或 height，也会自动填充。例如：\<div>\</div>,此\<div>宽度就会自动填满容器。
 > + 有时候元素就算没有设置 width 或 height，也会自动填充对应的方位。例如：此时\<div>宽度就会自动填满包含块容器。
     div { 
@@ -372,3 +373,49 @@ table-cell 布局，左右两栏作为单元格处理，或者使用 border 边�
 > margin:auto 的填充规则如下。
 > + 如果一侧定值，一侧 auto，则 auto 为剩余空间大小。
 > + 如果两侧均是 auto，则平分剩余空间。
+> 由于 CSS 世界中 margin 的初始值大小是 0，因此，上面的例子如果margin-right 缺失，实现的效果正好是块级元素的右对齐效果。也就是：
+
+    .son { 
+        width: 200px; 
+        margin-left: auto; 
+    }
+> 我们垂直方向 margin 无法实现居中了吗？当然是可以的，而且场景还不止一种。
+> + 第一种方法是使用 writing-mode 改变文档流的方向：此时.son 就是垂直居中对齐的，但是这也带来另外的问题，就是水平方向无法 auto 居中了。
+
+    .father { 
+        height: 200px; 
+        writing-mode: vertical-lr; 
+    } 
+    .son { 
+        height: 100px; 
+        margin: auto; 
+    }
+
+> + 所以，有人会关心有没有让水平垂直同时居中的方法。有，就是这里要提的第二种方法，绝对定位元素的 margin:auto 居中
+
+    .father { 
+        width: 300px; height:150px; 
+        position: relative; 
+    } 
+    .son { 
+        position: absolute; 
+        top: 0; right: 0; bottom: 0; left: 0; 
+    }
+
+> + > 此时.son 这个元素的尺寸表现为“格式化宽度和格式化高度”，和<div>的“正常流宽度”一样，同属于外部尺寸，也就是尺寸自动填充父级元素的可用尺寸，此时我们给.son 设置尺寸,此时宽高被限制，原本应该填充的空间就被空余了出来，这多余的空间就是 margin:auto计算的空间，
+
+    .son { 
+        position: absolute; 
+        top: 0; right: 0; bottom: 0; left: 0; 
+        width: 200px; height: 100px; 
+    }
+
+> + > 因此，如果这时候我们再设置一个 margin:auto：那么我们这个.son 元素就水平方向和垂直方向同时居中了。因为 auto 正好把上下左右剩余空间全部等分了，自然就居中！
+
+    .son { 
+        position: absolute; 
+        top: 0; right: 0; bottom: 0; left: 0; 
+        width: 200px; height: 100px; 
+        margin: auto; 
+    }
+> + > 绝对定位下的 margin:auto 居中是我用得最频繁的块级元素垂直居中对齐方式，比 top:50%然后 margin 负一半元素高度的方法要好使得多。
