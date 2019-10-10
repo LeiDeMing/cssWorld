@@ -363,6 +363,8 @@ table-cell 布局，左右两栏作为单元格处理，或者使用 border 边�
 #### 深入理解 CSS 中的 margin:auto
 > 首先，我们需要知道下面这些事实。
 > margin 属性的auto 计算就是为块级元素左中右对齐而设计的，和内联元素使用 text-align 控制左中右对齐正好遥相呼应！
+> 另外，对于替换元素，如果我们设置 display:block，则 margin:auto 的计算规则同
+样适合
 > + 有时候元素就算没有设置 width 或 height，也会自动填充。例如：\<div>\</div>,此\<div>宽度就会自动填满容器。
 > + 有时候元素就算没有设置 width 或 height，也会自动填充对应的方位。例如：此时\<div>宽度就会自动填满包含块容器。
     div { 
@@ -419,3 +421,14 @@ table-cell 布局，左右两栏作为单元格处理，或者使用 border 边�
         margin: auto; 
     }
 > + > 绝对定位下的 margin:auto 居中是我用得最频繁的块级元素垂直居中对齐方式，比 top:50%然后 margin 负一半元素高度的方法要好使得多。
+
+#### margin 无效情形解析
+> + （1）display 计算值 inline 的非替换元素的垂直 margin 是无效的，虽然规范提到有渲染，但浏览器表现却未寻得一点踪迹，这和 padding 是有明显区别的。对于内联替换元素，垂直 margin 有效，并且没有 margin 合并的问题，所以图片永远不会发生 margin 合并。
+> + （2）表格中的<tr>和<td>元素或者设置 display 计算值是 table-cell 或 table-row 的元素的 margin 都是无效的。但是，如果计算值是 table-caption、table 或者 inline-table则没有此问题，可以通过 margin 控制外间距，甚至::first-letter 伪元素也可以解析 margin。
+> + （3）margin 合并的时候，更改 margin 值可能是没有效果的。以父子 margin 重叠为例，假设父元素设置有 margin-top:50px，则此时子元素设置 margin-top:30px 就没有任何效果表现，除非大小比 50px 大，或者是负值。
+> + （4）绝对定位元素非定位方位的 margin 值“无效”。什么意思呢？很多时候，我们对元素进行绝对定位的时候，只会设置 1～2 个相邻方位。img { top: 10%; left: 30%;}
+> + （5）定高容器的子元素的 margin-bottom 或者宽度定死的子元素的 margin-right 的定位“失效”,若想使用 margin 属性改变自身的位置，必须是和当前元素定位方向一样的 margin 属性才可以，否则，margin 只能影响后面的元素或者父元素
+> + > 在默认流下，其定位方向是左侧以及上方，此时只有 margin-left和 margin-top 可以影响元素的定位。但是，如果通过一些属性改变了定位方向，如float:right 或者绝对定位元素的 right 右侧定位，则反过来 margin-right 可以影响元素的定位，margin-left 只能影响兄弟元素
+> + （6）鞭长莫及导致的 margin 无效。
+> + （7）内联特性导致的 margin 无效
+> + > 这里的例子也很有代表性。一个容器里面有一个图片，然后这张图片设置 margin-top负值，让图片上偏移。但是，随着我们的负值越来越负，结果达到某一个具体负值的时候，图片不再往上偏移了
