@@ -475,3 +475,36 @@ table-cell 布局，左右两栏作为单元格处理，或者使用 border 边�
         border-right: 50px solid transparent; 
         background-position: 100% 50%; 
     }
+
++ 2．优雅地增加点击区域大小
+> + 其中，首推透明 border 方法，原因很简单，假设我们的图标是使用工具生成的，那么background-position 就是限定死的值，若再使用 padding 撑开间距，就会遇到定位不准的问题。但是，若是使用透明 border 增加点击区域，则无此问题，只要合并时留下足够的间距就可以了。
+
+    .icon-clear { 
+        width: 16px; 
+        height: 16px; 
+        border: 11px solid transparent; 
+        ... 
+    }
+
++ 3．三角等图形绘制
+> 即使在移动端，使用 CSS 的 border 属性绘制三角形等图形仍是性价比最高的方式。例如，一个朝下的等腰直角三角形，直接用：
+
+    div { 
+        width: 0; 
+        border: 10px solid; 
+    border-color: #f30 transparent transparent; 
+}
+
+#### border 与图形构建
+> border 属性可以轻松实现兼容性非常好的三角图形效果，为什么可以呢？其底层原因受inset/outset 等看上去没有实用价值的 border-style 属性影响，边框 3D 效果在互联网早期其实还是挺潮的，那个时候人们喜欢有质感的东西，为了呈现逼真的 3D 效果，自然在边框转角的地方一定要等分平滑处理，然后不同的方向赋予不同的颜色。然后，这一转角规则也被 solid类型的边框给沿用了。因此，我们就不难理解下面的 4 色边框的表现了：
+
+    div { 
+        width: 10px; height: 10px; 
+        border: 10px solid; 
+        border-color: #f30 #00f #396 #0f0; 
+    }
+
+> 此时，如果设置左右下 3 个方向边框色为透明，是不是就是一个梯形了？
+> 此时，再进一步，宽度从 10px 变成 0，是不是上面梯形下方的开口也就从 10px 变成 0了？是不是三角形效果就出现了？
+
+#### border [等高布局技术](http://demo.cssworld.cn/4/4-4.php)
