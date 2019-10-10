@@ -444,3 +444,25 @@ table-cell 布局，左右两栏作为单元格处理，或者使用 border 边�
 > + thin：薄薄的，等同于 1px。
 > + medium（默认值）：薄厚均匀，等同于 3px。
 > + thick：厚厚的，等同于 4px。
+
+#### 了解各种 border-style 类型
++ 1．border-style:none
+> + 注意，border-style 的默认值是 none
+
++ 2．border-style:solid
+
++ 3．border-style:dashed
+> + 这虚线颜色区的宽高比以及颜色区和透明区的宽度比例在不同浏览器下是有差异的。例如，在 Chrome 和 Firefox 浏览器下，颜色区的宽高比是 3:1，颜色区和透明区的宽度比例是 1:1，如图 4-59 所示；而 IE 浏览器则是另外的数据，颜色区的宽高比是 2:1，颜色区和透明区的宽度比例也是 2:1
+
++ 4．border-style:dotted
+
++ 5．border-style:double
+> + 视觉表现为线框—透明线框，根据 border-width 大小不同，其表现规则。[如表 4-2](http://ww1.sinaimg.cn/large/0060ZzrAgy1g7sxezlbqpj30m8073jru.jpg)所示
+> + “为什么 border-width的默认值是 media（3px）？”答案就在这里，虽然说实际开发的时候 1px 大小的 solid 类型边框是最常用的，但是却无法让 double 类型边框有合乎语义的表现，因此使用了能表现double 类型的最小边框宽度 3px 作为边框宽度默认值。
+
++ 6．其他 border-style 类型
+> + inset（内凹）、outset（外凸）、groove（沟槽）、ridge（山脊）风格老土过时，且兼容性惨不忍睹（见图 4-67）。因此，它
+们没有任何实用价值。但是，它们也不是一无是处，这几个边框类型的出现无形中规范了实线边框的转角连接规则。规范中并没有任何关于边框连接规则的描述，按照一般的套路，浏览器会表现不一，类似虚线之类边框确实如此，但是，对于 solid 类型边框，各个浏览器却像是约定好了，连接表现一致，背后起作用的恰恰是这几个看上去没有任何作用的 border-style 类型。这为 border 图形生成技术的广泛应用打下了坚实的基础。
+
+#### border-color 和 color
+
