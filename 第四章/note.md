@@ -465,4 +465,13 @@ table-cell 布局，左右两栏作为单元格处理，或者使用 border 边�
 们没有任何实用价值。但是，它们也不是一无是处，这几个边框类型的出现无形中规范了实线边框的转角连接规则。规范中并没有任何关于边框连接规则的描述，按照一般的套路，浏览器会表现不一，类似虚线之类边框确实如此，但是，对于 solid 类型边框，各个浏览器却像是约定好了，连接表现一致，背后起作用的恰恰是这几个看上去没有任何作用的 border-style 类型。这为 border 图形生成技术的广泛应用打下了坚实的基础。
 
 #### border-color 和 color
+> border-color 有一个很重要也很实用的特性，就是“border-color 默认颜色就是color 色值”,具有类似特性的 CSS 属性还有 outline、box-shadow 和 text-shadow 等
 
+#### border 与透明边框技巧
+> 虽然 color:transparent 在 IE9 以上版本的浏览器才支持，但是 border-color: transparent 在 IE7 浏览器就开始支持了，于是，我们解决一些棘手问题的思路就更加开阔了。
++ 1．右下方 background 定位的技巧。假设现在有一个宽度不固定的元素，我们需要在距离右边缘 50 像素的位置设置一个背景图片，此时 background 属性就遭遇尴尬了：由于宽度不固定，所以无法通过设定具体数值来实现我们想要的效果，因为 background 是相对左上角定位的，我们的需求是右侧定位。要实现上面的需求，方法挺多。其中一种方法就是使用透明边框，如下 CSS 代码：此时，对 50px 的间距我们使用 transparent 边框表示，这样就可以使用百分比 backgroundposition 定位到我们想要的位置了。因为，默认 background 背景图片是相对于 padding box定位的，也就是说，background-position:100%的位置计算默认是不会把 border-width计算在内的。
+
+    .box { 
+        border-right: 50px solid transparent; 
+        background-position: 100% 50%; 
+    }
