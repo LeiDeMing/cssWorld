@@ -41,4 +41,28 @@
 > + line-height不能影响替换元素（如图片的高度）
 > + line-height 在这个混合元素的“行框盒子”中扮演的角色是决定这个行盒的最小高度，听上去似乎有点儿尴尬，对于纯文本元素，line-height 非常威风，直接决定了最终的高度。但是，如果同时有替换元素，则line-height 的表现一下子弱了很多，只能决定最小高度，对最终的高度表现有望尘莫及之感。为什么会这样呢？一是替换元素的高度不受 line-height 影响，二是 vertical-align属性在背后作祟。
 + B 块级元素
-> + 
+> + line-height 对其本身是没有任何作用的，我们平时改变 line-height，块级元素的高度跟着变化实际上是通过改变块级元素里面内联级别元素占据的高度实现的
+> + 比方说，一个\<p>元素中有 10 行图文内容，则这个\<p>元素的高度就是由这 10 行内容产生的 10 个“行框盒子”高度累加而成；一个\<article>元素中可能会有 20 个\<p>元素，则这个\<article>元素又是由这 20 个块级\<p>元素高度累加而成，同时块级元素还可以通过height 和 min-height 以及盒模型中的 margin、padding 和 border 等属性改变占据的高度，所有这一切就构成了 CSS 世界完整的高度体系。
+
+#### 为什么 line-height 可以让内联元素“垂直居中”
+> 多行文本或者替换元素的垂直居中实现原理和单行文本就不一样了，需要 line-height属性的好朋友 vertical-align 属性帮助才可以，示例代码如下：
+
+    .box { 
+        line-height: 120px; 
+        background-color: #f0f3f9; 
+    } 
+    .content { 
+        display: inline-block; 
+        line-height: 20px; 
+        margin: 0 20px; 
+        vertical-align: middle; 
+    } 
+    <div class="box"> 
+        <div class="content">基于行高实现的...</div> 
+    </div>
+
+> 实现的原理大致如下。
+> + （1）多行文字使用一个标签包裹，然后设置 display 为 inline-block。好处在于既能重置外部的 line-height 为正常的大小，又能保持内联元素特性，从而可以设置vertical-align 属性，以及产生一个非常关键的“行框盒子”。我们需要的其实并不是这个“行框盒子”，而是每个“行框盒子”都会附带的一个产物—“幽灵空白节点”，即一个宽度为0、表现如同普通字符的看不见的“节点”。有了这个“幽灵空白节点”，我们的 lineheight:120px 就有了作用的对象，从而相当于在.content 元素前面撑起了一个高度为120px 的宽度为 0 的内联元素。
+> + （2）因为内联元素默认都是基线对齐的，所以我们通过对.content 元素设置 verticalalign:middle 来调整多行文本的垂直位置，从而实现我们想要的“垂直居中”效果。如果是要借助 line-height 实现图片垂直居中效果，也是类似的原理和做法。
+> + 这里实现的“垂直居中”确实也不是真正意义上的垂直居中，也是“近似垂直居中”。然后通过尺子工具一量就会发现，上面的留空是
+41px，下面的留空是 39px，[如图](http://ww1.sinaimg.cn/large/0060ZzrAgy1g7u1vuydv0j307903fjsm.jpg)
