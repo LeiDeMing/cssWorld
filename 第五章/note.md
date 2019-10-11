@@ -66,3 +66,54 @@
 > + （2）因为内联元素默认都是基线对齐的，所以我们通过对.content 元素设置 verticalalign:middle 来调整多行文本的垂直位置，从而实现我们想要的“垂直居中”效果。如果是要借助 line-height 实现图片垂直居中效果，也是类似的原理和做法。
 > + 这里实现的“垂直居中”确实也不是真正意义上的垂直居中，也是“近似垂直居中”。然后通过尺子工具一量就会发现，上面的留空是
 41px，下面的留空是 39px，[如图](http://ww1.sinaimg.cn/large/0060ZzrAgy1g7u1vuydv0j307903fjsm.jpg)
+
+#### 深入 line-height 的各类属性值
+> line-height 的默认值是 normal，还支持数值、百分比值以及长度值
+> normal 实际上是一个和font-family 有着密切关联的变量值
+> 比方说，一个\<div>元素，有两段对比 CSS 如下：
+
+    div { 
+        line-height: normal; 
+        font-family: 'microsoft yahei'; 
+    } 
+    div { 
+        line-height: normal; 
+        font-family: simsun; 
+    }
+
+> 此时两段 CSS 中 line-height 的属性值 normal 的计算值是不一样的，[表](http://ww1.sinaimg.cn/large/0060ZzrAgy1g7u2lzd4ytj30m703y74j.jpg)给出的是我在几个桌面浏览器的测试数据。
+> + 数值，如 line-height:1.5，其最终的计算值是和当前 font-size 相乘后的值。例如，假设我们此时的 font-size 大小为 14px，则 line-height 计算值是1.5*14px=21px
+> + 百分比值，如 line-height:150%，其最终的计算值是和当前 font-size 相乘后的值。例如，假设我们此时的 font-size 大小为 14px，则 line-height 计算值是150%*14px=21px。
+> + 长度值，也就是带单位的值，如 line-height:21px 或者 line-height:1.5em等，此处 em 是一个相对于 font-size 的相对单位，因此，line-height:1.5em最终的计算值也是和当前font-size相乘后的值。例如，假设我们此时的font-size大小为 14px，则 line-height 计算值是 1.5*14px=21px。
+> 实际上，line-height:1.5和另外两个有一点儿不同，那就是继承细节有所差别。如果使用数值作为 line-height 的属性值，那么所有的子元素继承的都是这个值；但是，如果使用百分比值或者长度值作为属性值，那么所有的子元素继承的是最终的计算值。
+> line-height:150%、line-height:1.5em 要想有类似 line-height:1.5的继承效果，也是可以实现的，类似下面的 CSS 代码：
+    
+    * {
+        line-height: 150%;
+    }
+
+> HTML 中的很多替换元素，尤其表单类的替换元素，如输入框、按钮之类的，很多具有继承特性的 CSS 属性其自己也有一套，如 font-family、font-size 以及这里的 line-height。由于继承是属于最弱的权重，因此 body 中设置的 line-height 是无法影
+响到这些替换元素的，但是*作为一个选择器，就不一样了，会直接重置这些替换元素默认的line-height，这其实是我们需要的
+
+#### 内联元素 line-height 的“大值特性”
+> CSS 代码有所不同，分别为
+
+    .box { 
+        line-height: 96px; 
+    } 
+    .box span { 
+        line-height: 20px; 
+    } 
+    //和
+
+    .box { 
+        line-height: 20px; 
+    } 
+    .box span { 
+        line-height: 96px; 
+    }
+
+> 正确的答案是：全都是 96px 高！也就是说：无论内联元素 line-height 如何设置，最终父级元素的高度都是由数值大的那个 line-height 决定的，我称之为“内联元素 line-height 的大值特性”。
+> 但是，在内联盒模型中，存在一些你看不到的东西，没错，就是多次提到的“幽灵空白节点”
+> 这里的\<span>是一个内联
+元素，因此自身是一个“内联盒子”，本例就这一个“内联盒子”，只要有“内联盒子”在，就一定会有“行框盒子”，就是每一行内联元素外面包裹的一层看不见的盒子。然后，重点来了，在每个“行框盒子”前面有一个宽度为 0 的具有该元素的字体和行高属性的看不见的“幽灵空白节点”，如果套用本案，则这个“幽灵空白节点”就在\<span>元素的前方
