@@ -119,7 +119,6 @@
 元素，因此自身是一个“内联盒子”，本例就这一个“内联盒子”，只要有“内联盒子”在，就一定会有“行框盒子”，就是每一行内联元素外面包裹的一层看不见的盒子。然后，重点来了，在每个“行框盒子”前面有一个宽度为 0 的具有该元素的字体和行高属性的看不见的“幽灵空白节点”，如果套用本案，则这个“幽灵空白节点”就在\<span>元素的前方
 
 ### line-height 的好朋友 vertical-align
-> vertical-align 起作用是有前提条件的，这个前提条件就是：只能应用于内联元素以及 display 值为 table-cell 的元素
 > 比方说，对于下面非常简单的 CSS 和 HTML 代码：
 
     .box { line-height: 32px; } 
@@ -143,3 +142,61 @@
 > 在 CSS 世界中，凡是百分比值，均是需要一个相对计算的值，例如，margin 和 padding是相对于宽度计算的，line-height 是相对于 font-size 计算的，而这里的 verticalalign 属性的百分比值则是相对于 line-height 的计算值计算的
 
 #### vertical-align 作用的前提
+> 只能应用于内联元素以及 display 值为 table-cell 的元素,换句话说，vertical-align 属性只能作用在 display 计算值为 inline、inlineblock，inline-table 或 table-cell 的元素上
+> 因此，默认情况下，\<span>、\<strong>、\<em>等内联元素，\<img>、\<button>、\<input>等替换元素，非 HTML 规范的自定义标签元素，以及\<td>单元格，都是支持 vertical-align 属性的，其他块级元素则不支持
+> CSS 世界中，有一些 CSS 属性值会在背后默默地改变元素 display 属性的计算值，从而导致 vertical-align 不起作用
+> 下面这种情况:
+
+    .box { 
+    height: 128px; 
+    } 
+    .box > img { 
+    height: 96px; 
+    vertical-align: middle; 
+    } 
+    <div class="box"> 
+    <img src="1.jpg"> 
+    </div>
+
+> + 这种情况看上去是 vertical-align:middle 没起作用，实际上，vertical-align是在努力地渲染的，只是行框盒子前面的“幽灵空白节点”高度太小，如果我们通过设置一个足够大的行高让“幽灵空白节点”高度足够，就会看到 vertical-align:middle 起作用了，
+> + CSS 代码如下：
+
+    .box { 
+        height: 128px; 
+        line-height: 128px; /* 关键 CSS 属性 */ 
+    } 
+    .box > img { 
+        height: 96px; 
+        vertical-align: middle; 
+    }
+
+> 是因为对 table-cell 元素而言，vertical-align 起作用的是 table-cell元素自身
+
+    .cell { 
+        height: 128px; 
+        display: table-cell; 
+    } 
+    .cell > img { 
+        height: 96px; 
+        vertical-align: middle; 
+    } 
+    <div class="cell"> 
+        <img src="1.jpg"> 
+    </div>
+
+> + 结果[图片](http://ww1.sinaimg.cn/large/0060ZzrAgy1g7v5hzqh8mj30az03r74i.jpg)并没有要垂直居中的迹象，还是紧贴着父元素的上边缘
+> + 如果 vertical-align:middle 是设置在 table-cell 元素上，CSS 代码如下：
+
+    .cell { 
+        height: 128px; 
+        display: table-cell;
+        vertical-align: middle; 
+    } 
+    .cell > img { 
+        height: 96px; 
+    }
+
+> + 那么图片就有了明显的变化，[如图](http://ww1.sinaimg.cn/large/0060ZzrAgy1g7v5hq2dgpj309504edg4.jpg)
+> + 所以，大家一定要明确，虽然就效果而言，table-cell 元素设置 vertical-align 垂直对齐的是子元素，但是其作用的并不是子元素，而是 table-cell 元素自身。就算 table-cell 元素的子元素是一个块级元素，也一样可以让其有各种垂直对齐表现
+
+#### vertical-align 和 line-height 之间的关系
