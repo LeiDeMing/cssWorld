@@ -200,3 +200,34 @@
 > + 所以，大家一定要明确，虽然就效果而言，table-cell 元素设置 vertical-align 垂直对齐的是子元素，但是其作用的并不是子元素，而是 table-cell 元素自身。就算 table-cell 元素的子元素是一个块级元素，也一样可以让其有各种垂直对齐表现
 
 #### vertical-align 和 line-height 之间的关系
+>\<span>标签前面实际上有一个看不见的类似字符的“幽灵空白节点”。看不见的东西不利于理解，因此我们不妨使用一个看得见的字符 x
+占位，同时“文字”后面也添加一个 x，便于看出基线位置，于是就有如下 HTML：
+
+    <div class="box"> 
+        x<span>文字 x</span> 
+    </div>
+
+> 我们可以明显看到两处大小完全不同的文字。一处是字母 x 构成了一个“匿名内联盒子”，另一处是“文字 x”所在的\<span>元素，构成了一个“内联盒子”。由于都受 lineheight:32px 影响，因此，这两个“内联盒子”的高度都是 32px。下面关键的来了，对字符而言，font-size 越大字符的基线位置越往下，因为文字默认全部都是基线对齐，所以当字号大小不一样的两个文字在一起的时候，彼此就会发生上下位移，如果位移距离足够大，就会超过行高的限制，而导致出现意料之外的高度,[如图](http://ww1.sinaimg.cn/large/0060ZzrAgy1g7v5sfc6omj30dn02cmxo.jpg)
+> 任意一个块级元素，里面若有图片，则块级元素高度基本上都要比图片的高度高,间隙产生的三大元凶就是“幽灵空白节点”line-height 和 vertical-align 属性。
+> 而图片作为替换元素其基线是自身的下边缘。根据定义，默认和基线（也就是这里字母 x 的下边缘）对齐，字母 x 往下的行高产生的多余的间隙就嫁祸到图片下面，让人以为是图片产生的间隙，实际上，是“幽灵空白节点”、line-height 和 vertical-align 属性共同作用的结果。
+> 知道了原理，要清除该间隙，就知道如何对症下药了。方法很多，具体如下:
+> + 图片块状化,可以一口气干掉“幽灵空白节点”、line-height 和 verticalalign。
+> + 容器 line-height 足够小,只要半行间距小到字母 x 的下边缘位置或者再往上，自然就没有了撑开底部间隙高度空间了。比方说，容器设置 line-height:0。
+> + 容器 font-size 足够小。此方法要想生效，需要容器的 line-height 属性值和当前 font-size 相关，如 line-height:1.5 或者 line-height:150%之类；否则只会让下面的间隙变得更大，因为基线位置因字符 x 变小而往上升了。
+> + 图片设置其他 vertical-align 属性值。间隙的产生原因之一就是基线对齐，所以我们设置 vertical-align 的值为 top、middle、bottom 中的任意一个都是可以的。
+> 提到了一个“内联特性导致的 margin 无效”的案例，代码如下：
+
+    <div class="box"> 
+    <img src="mm1.jpg"> 
+    </div> 
+    .box > img { 
+        height: 96px;
+        margin-top: -200px; 
+    }
+
+> + 其原理和上面图片底部留有间隙实际上是一样的，图片的前面有个“幽灵空白节点”，而在 CSS 世界中，非主动触发位移的内联元素是不可能跑到计算容器外面的，导致图片的位置被“幽灵空白节点”的 vertical-align:baseline 给限死了
+
+#### 深入理解 vertical-align 线性类属性值
++ 1．inline-block 与 baseline
+> + vertical-align 属性的默认值 baseline 在文本之类的内联元素那里就是字符 x 的下边缘，对于替换元素则是替换元素的下边缘
+> + 如果是 inline-block 元素，则规则要复杂了：一个 inline-block 元素，如果里面没有内联元素，或者 overflow 不是 visible，则该元素的基线就是其 margin 底边缘；否则其基线就是元素里面最后一行内联元素的基线。
