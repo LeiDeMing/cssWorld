@@ -117,3 +117,29 @@
 > 但是，在内联盒模型中，存在一些你看不到的东西，没错，就是多次提到的“幽灵空白节点”
 > 这里的\<span>是一个内联
 元素，因此自身是一个“内联盒子”，本例就这一个“内联盒子”，只要有“内联盒子”在，就一定会有“行框盒子”，就是每一行内联元素外面包裹的一层看不见的盒子。然后，重点来了，在每个“行框盒子”前面有一个宽度为 0 的具有该元素的字体和行高属性的看不见的“幽灵空白节点”，如果套用本案，则这个“幽灵空白节点”就在\<span>元素的前方
+
+### line-height 的好朋友 vertical-align
+> vertical-align 起作用是有前提条件的，这个前提条件就是：只能应用于内联元素以及 display 值为 table-cell 的元素
+> 比方说，对于下面非常简单的 CSS 和 HTML 代码：
+
+    .box { line-height: 32px; } 
+    .box > span { font-size: 24px; } 
+    <div class="box"> 
+        <span>文字</span> 
+    </div>
+
+> 但是事实上，高度并不是 32px，而是要大那么几像素（受不同字体影响，增加高度也不一样），比方说 36px，[如图](http://ww1.sinaimg.cn/large/0060ZzrAgy1g7v4uydyksj303o01w3yc.jpg)
+
+#### vertical-align 家族基本认识
+> vertical-align 属性值分为以下 4 类：
+> + 线类，如 baseline（默认值）、top、middle、bottom；
+> + 文本类，如 text-top、text-bottom；
+> + 上标下标类，如 sub、super；
+> + 数值百分比类，如 20px、2em、20%等。(实际上，“数值百分比类”应该是两类，分别是“数值类”和“百分比类”，这里之所以把它们合在一起归为一类，是因为它们有不少共性，包括“都带数字”和“行为表现一致”。)(根据计算值的不同，相对于基线往上或往下偏移，到底是往上还是往下取决于 vertical- align 的计算值是正值还是负值，如果是负值，往下偏移，如果是正值，往上偏移)
+> 关键是 vertical-align 的数值属性值在实际开发的时候实用性非常强
+> + 一是其兼容性非常好
+> + 二是其可以精确控制内联元素的垂直对齐位置
+> + [demo](http://demo.cssworld.cn/5/3-3.php)
+> 在 CSS 世界中，凡是百分比值，均是需要一个相对计算的值，例如，margin 和 padding是相对于宽度计算的，line-height 是相对于 font-size 计算的，而这里的 verticalalign 属性的百分比值则是相对于 line-height 的计算值计算的
+
+#### vertical-align 作用的前提
