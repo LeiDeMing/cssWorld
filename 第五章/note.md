@@ -231,3 +231,15 @@
 + 1．inline-block 与 baseline
 > + vertical-align 属性的默认值 baseline 在文本之类的内联元素那里就是字符 x 的下边缘，对于替换元素则是替换元素的下边缘
 > + 如果是 inline-block 元素，则规则要复杂了：一个 inline-block 元素，如果里面没有内联元素，或者 overflow 不是 visible，则该元素的基线就是其 margin 底边缘；否则其基线就是元素里面最后一行内联元素的基线。
+> 见demo(inline-block与baseline.html)
+> [复杂案例](http://demo.cssworld.cn/5/3-6.php)
+> 我总结的一套基于 20px 图标对齐的处理技巧，该技巧有下面 3 个要点。
+> + （1）图标高度和当前行高都是 20px。很多小图标背景合并工具都是图标宽高多大生成的CSS 宽高就是多大，这其实并不利于形成可以整站通用的 CSS 策略，我的建议是图标原图先扩展成统一规格，比方说这里的 20px×20px，然后再进行合并，可以节约大量 CSS 以及对每个图标对齐进行不同处理的开发成本。
+> + （2）图标标签里面永远有字符。这个可以借助:before 或:after 伪元素生成一个空格字符轻松搞定。
+> + （3）图标 CSS 不使用 overflow:hidden 保证基线为里面字符的基线，但是要让里面潜在的字符不可见。
+> + [demo](http://demo.cssworld.cn/5/3-7.php)
+
++ 2．了解 vertial-align:top/bottom
+> + vertial-align:top 就是垂直上边缘对齐，具体定义如下。
+> + 内联元素：元素底部和当前行框盒子的顶部对齐。
+> + table-cell 元素：元素底 padding 边缘和表格行的顶部对齐。
