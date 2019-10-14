@@ -9,3 +9,17 @@
 > + 块状化并格式化上下文；
 > + 破坏文档流；
 > + 没有任何 margin 合并；
+> 块状化的意思是，元素一旦 float 的属性值不为 none，则其 display 计算值就是 block或者 table。
+> 因此，没有任何理由出现下面的样式组合：
+
+    span { 
+        display: block; /* 多余 */ 
+        float: left; 
+    } 
+    span { 
+        float: left; 
+        vertical-align: middle; /* 多余 */ 
+    }
+
+> float 属性与 display 属性值转换关系[如表](http://ww1.sinaimg.cn/large/0060ZzrAgy1g7xmt56tlcj30gi0erwf5.jpg)
+> 除了 inline-table 计算为 table 外，其他全都是 block。至于 float 元素的块状格式化上下文特性，参见 6.3 节
