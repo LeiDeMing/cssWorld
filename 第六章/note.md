@@ -23,3 +23,7 @@
 
 > float 属性与 display 属性值转换关系[如表](http://ww1.sinaimg.cn/large/0060ZzrAgy1g7xmt56tlcj30gi0erwf5.jpg)
 > 除了 inline-table 计算为 table 外，其他全都是 block。至于 float 元素的块状格式化上下文特性，参见 6.3 节
+
+#### float 的作用机制
+> 甚至有些人会问这样的问题：“如何解决浮动让父元素高度塌陷的 bug？”bug？别逗了。一定要明确这一点，浮动使高度塌陷不是 bug，而是标准！有人可能会有疑问了：怎么会有规范让人“干坏事”的？
+> float 属性让父元素高度塌陷的原因就是为了实现文字环绕效果。
