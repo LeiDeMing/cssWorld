@@ -253,3 +253,24 @@
 > 基本上所有的字体中，字符 x 的位置都是偏下一点儿的，font-size 越大偏移越明显，这才导致默认状态下的 vertial-align:middle 实现的都是“近似垂直居中”。[demo](http://demo.cssworld.cn/5/3-8.php)
 > 通常的做法是设置 font-size:0，整个字符 x 缩小成了一个看不见的点，根据 line-height 的半行间距上下等分规则，这个点就正
 好是整个容器的垂直中心位置，这样就可以实现真正意义上的垂直居中对齐了。
+
+#### 深入理解 vertical-align 文本类属性值
+> 文本类属性值指的就是 text-top 和 text-bottom，定义如下。
+> + vertical-align:text-top：盒子的顶部和父级内容区域的顶部对齐。
+> + vertical-align:text-bottom：盒子的底部和父级内容区域的底部对齐。
+> 在本书中，其可以看成是 Firefox/IE 浏览器文本选中的背景区域，或者默认状态下的内联文本的背景色区域。而所谓“父级内容区域”指的就是在父级元素当前 font-size 和 font-family 下应有的内容区域大小。
+> (演示页面)[http://demo.cssworld.cn/5/3-9.php]来示意 text-top 和 text-bottom属性值的样式表现
+> 有些 CSS 属性设计的初衷可能很简单，结果却满天飞；有些属性值理论应该有大成，实际却无人问津。vertical-align 的文本类属性值就是代表之一。它为什么会有这样糟糕的际遇呢？我认为原因很多，具体有以下几个
+> + （1）使用场景缺乏
+> + （2）文本类垂直对齐理解成本高
+> + （3）内容区域不直观且易变。
+
+#### 简单了解 vertical-align 上标下标类属性值
+> vertical-align 上标下标类属性值指的就是 sub 和 super 两个值，分别表示下标和上标。
+> 在 HTML 代码中，有两个标签语义就是下标和上标，分别是上标\<sup>和下标\<sub>
+> 最后，HTML 标签\<sup>和\<sup>的 vertical-align 属性也和 super 和 sub 有着非同一般的关系，那就是\<sup>标签默认的 vertical-align 属性值就是 super，\<sub>标签默认的 vertical-align 属性值就是 sub。
+> 属性值的定义:
+> + vertical-align:super：提高盒子的基线到父级合适的上标基线位置。
+> + vertical-align:sub：降低盒子的基线到父级合适的下标基线位置。
+
+#### 无处不在的 vertical-align
