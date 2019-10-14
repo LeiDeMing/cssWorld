@@ -277,3 +277,31 @@
 > 虽然同属线性类属性值，但是 top/bottom 和 baseline/middle 却是完全不同的两个帮派，前者对齐看边缘看行框盒子，而后者是和字符 x 打交道
 > 本章的内容是值得反复研读的
 > 实际上，根据反复测试和确认，vertical-align 各类属性值不存在相互冲突的情况，虽然某个vertical-align 属性值确实会影响其他元素的表现，但是这种作用并不是直接的。所以，在分析复杂场景的时候，仅需要套用定义分析当前 vertical-align 值的作用就可以了。
+
+#### 基于 vertical-align 属性的水平垂直居中弹框
+> vertical-align 属性实践，就是使用纯 CSS 实现大小不固定的弹框永远居中的效果，并且如果伪元素换成普通元素，连 IE7 浏览器都可以兼容。核心 CSS 代码如下：
+
+    .container { 
+        position: fixed; 
+        top: 0; right: 0; bottom: 0; left: 0; 
+        background-color: rgba(0,0,0,.5); 
+        text-align: center; 
+        font-size: 0; 
+        white-space: nowrap; 
+        overflow: auto; 
+    } 
+    .container:after { 
+        content: ''; 
+        display: inline-block; 
+        height: 100%; 
+        vertical-align: middle; 
+    } 
+    .dialog { 
+        display: inline-block; 
+        vertical-align: middle; 
+        text-align: left; 
+        font-size: 14px; 
+        white-space: normal; 
+    }
+
+> 分析步骤 见书145页
