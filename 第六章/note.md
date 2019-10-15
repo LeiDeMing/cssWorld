@@ -96,3 +96,23 @@
 ### float 的天然克星 clear
 #### 什么是 clear 属性
 > clear 属性值:
+> + none：默认值，左右浮动来就来。
+> + left：左侧抗浮动。
+> + right：右侧抗浮动。
+> + both：两侧抗浮动。
+> 我的答案非常直白：没错，确实没有什么用！凡是 clear:left 或者 clear:right 起作用的地方，一定可以使用 clear:both 替换！
+
+> 举个例子，假设容器宽度足够宽，有 10 个\<li>元素，设置了如下 CSS 代码：[如图](http://ww1.sinaimg.cn/large/0060ZzrAgy1g7ys7dkkqbj306801w0km.jpg)
+
+    li { 
+        width: 20px; height: 20px; 
+        margin: 5px; 
+        float: left; 
+    } 
+    li:nth-of-type(3) { 
+        clear: both; 
+    }
+
+> 原因在于，clear 属性是让自身不能和前面的浮动元素相邻，注意这里“前面的”3 个字，也就是 clear 属性对“后面的”浮动元素是不闻不问的，因此才 2 行显示而非 3 行。
+
+#### 成事不足败事有余的 clear
