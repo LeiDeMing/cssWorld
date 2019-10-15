@@ -140,3 +140,17 @@
     }
 
 >由此可见，clear:both 只能在一定程度上消除浮动的影响，要想完美地去除浮动元素的影响，还需要使用其他 CSS 声明。那应该使用哪些 CSS 声明呢？请看 6.3 节
+
+### CSS 世界的结界——BFC
+#### BFC 的定义
+> BFC 全称为 block formatting context，中文为“块级格式化上下文”。相对应的还有 IFC，也就是 inline formatting context，中文为“内联格式化上下”
+> 大家请记住下面这个表现原则：如果一个元素具有 BFC，内部子元素再怎么翻江倒海、翻云覆雨，都不会影响外部的元素。所以，BFC 元素是不可能发生 margin 重叠的，因为 margin重叠是会影响外面的元素的；BFC 元素也可以用来清除浮动的影响，因为如果不清除，子元素浮动则父元素高度塌陷，必然会影响后面元素布局和定位，这显然有违 BFC 元素的子元素不会影响外部元素的设定。
+> 那什么时候会触发 BFC 呢？常见的情况如下：
+> + \<html>根元素；
+> + float 的值不为 none；
+> + overflow 的值为 auto、scroll 或 hidden；
+> + display 的值为 table-cell、table-caption 和 inline-block 中的任何一个；
+> + position 的值不为 relative 和 static。
+
+#### BFC 与流体布局
+> BFC 的结界特性最重要的用途其实不是去 margin 重叠或者是清除 float 影响，而是实现更健壮、更智能的自适应布局。
