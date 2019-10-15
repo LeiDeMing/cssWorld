@@ -32,3 +32,67 @@
 > 我们不妨看下面这个很有学习价值的例子。很多人会有这样的想法，就是认为一个元素只要设置了具体的高度值，就不需要担心 float 属性造成的高度塌陷的问题了，既然有了高度，何来“高度塌陷”。这句话对不对呢？是对的。但是，其中也隐含了陷阱，因为“文字环绕效果”是由两个特性（即“父级高度塌陷”和“行框盒子区域限制”）共同作用的结果，定高只能解决“父级高度塌陷”带来的影响，但是对“行框盒子区域限制”却没有任何效果，结果导致的问题是浮动元素垂直区域一旦超出高度范围，或者下面元素 margin-top 负值上偏移，就很容易使后面的元素发生“环绕效果”
 > 虽然肉眼看上去容器和图片一样高，但是，大家都读过5.3 节，应该都知道内联状态下的图片底部是有间隙的，也就是.float 这个浮动元素的实际高度并不是 64px，而是要比 64px 高几像素，带来的问题就是浮动元素的高度超出.father 几像素。
 >[实例](http://demo.cssworld.cn/6/1-1.php)
+
+#### float 更深入的作用机制
+> + 浮动锚点是 float 元素所在的“流”中的一个点，这个点本身并不浮动，就表现而言更像一个没有 margin、border 和 padding 的空的内联元素
+> + 浮动参考指的是浮动元素对齐参考的实体
+> 在 CSS 世界中，float 元素的“浮动参考”是“行框盒子”，也就是 float 元素在当前“行框盒子”内定位
+> 参考书6.1.3
+
+#### float 与流体布局
+> float 通过破坏正常 CSS 流实现 CSS 环绕，带来了烦人的“高度塌陷”的问题，然而，凡事都具有两面性，只要了解透彻，说不定就可以变废为宝、化腐朽为神奇。例如。我们可以利用 float 破坏 CSS 正常流的特性，实现两栏或多栏的自适应布局
+> 还记不记得之前小动物环绕的例子？其实我们稍加改造，就能变成一侧定宽的两栏自适应布局，HTML 和 CSS 代码如下：
+
+    <div class="father"> 
+        <img src="me.jpg"> 
+        <p class="animal">小猫 1，小猫 2，...</p> 
+    </div> 
+    .father { 
+        overflow: hidden; 
+    } 
+    .father > img { 
+        width: 60px; height: 64px; 
+        float: left; 
+    } 
+    .animal { 
+        margin-left: 70px; 
+    }
+
+> 和文字环绕效果相比，区别就在于.animal 多了一个 margin-left:70px，也就是所有小动物都要跟男主保持至少 70px 的距离，由于图片宽度就 60px，因此不会发生环绕，自适应效果达成。
+> 原理其实很简单，.animal 元素没有浮动，也没有设置宽度，因此，流动性保持得很好，设置 margin-left、border-left 或者 padding-left 都可以自动改变 content box 的尺寸，继而实现了宽度自适应布局效果。
+> [demo](http://demo.cssworld.cn/6/1-2.php)
+> 上面的技巧适用于一侧定宽一侧自适应：如果是宽度不固定，也有办法处理，这会在 6.3.2 节中介绍。如果是百分比宽度，则也是可以的，例如：
+
+    .left { 
+        float: left; 
+        width: 50%; 
+    } 
+    .right { 
+        margin-left: 50%; 
+    }
+
+> 如果是多栏布局，也同样适用，尤其[图](http://ww1.sinaimg.cn/large/0060ZzrAgy1g7yrz1vkhcj30aq01hdfq.jpg)所示的这种布局
+> 假设 HTML 结构如下：
+
+    <div class="box"> 
+    <a href class="prev">&laquo; 上一章</a> 
+    <a href class="next">下一章 &raquo;</a> 
+    <h3 class="title">第 112 章 动物环绕</h3> 
+    </div>
+
+> 则 CSS 可以如下：
+
+    .prev { 
+        float: left; 
+    } 
+    .next { 
+        float: right; 
+    } 
+    .title { 
+        margin: 0 70px; 
+        text-align: center; 
+    }
+
+### float 的天然克星 clear
+#### 什么是 clear 属性
+> clear 属性值:
