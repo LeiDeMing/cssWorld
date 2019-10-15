@@ -116,3 +116,27 @@
 > 原因在于，clear 属性是让自身不能和前面的浮动元素相邻，注意这里“前面的”3 个字，也就是 clear 属性对“后面的”浮动元素是不闻不问的，因此才 2 行显示而非 3 行。
 
 #### 成事不足败事有余的 clear
+> clear 属性只有块级元素才有效的，而::after 等伪元素默认都是内联水平，这就是借助伪元素清除浮动影响时需要设置 display 属性值的原因。
+> 由于 clear:both 的作用本质是让自己不和 float 元素在一行显示，并不是真正意义上的清除浮动，因此 float 元素一些不好的特性依然存在，于是，会有类似下面的现象
+> + （1）如果 clear:both 元素前面的元素就是 float 元素，则 margin-top 负值即使设成-9999px，也不见任何效果。
+> + （2）clear:both 后面的元素依旧可能会发生文字环绕的现象。举个例子，如下 HTML和 CSS：[如图](http://ww1.sinaimg.cn/large/0060ZzrAgy1g7ysde4bl9j307102pt90.jpg)
+
+    <div class="father"> 
+        <img src="zxx.jpg"> 
+        我是帅哥，好巧啊，我也是帅哥，原来看这本书的人都是帅哥~ 
+    </div> 
+    <div>虽然你很帅，但是我对你不感兴趣。</div>
+    .father:after {
+        content: ''; 
+        display: table; 
+        clear: both; 
+    } 
+    .father img { 
+        float:left; 
+        width: 60px; height: 64px; 
+    } 
+    .father + div { 
+        margin-top: -2px; 
+    }
+
+>由此可见，clear:both 只能在一定程度上消除浮动的影响，要想完美地去除浮动元素的影响，还需要使用其他 CSS 声明。那应该使用哪些 CSS 声明呢？请看 6.3 节
