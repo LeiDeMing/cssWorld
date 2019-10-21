@@ -200,3 +200,12 @@
 > 关于浏览器的滚动条，有以下几个小而美的结论。
 > + （1）在 PC 端，无论是什么浏览器，默认滚动条均来自<html>，而不是<body>标签。验证很简单，新建一个空白页面，此时<body>标签的默认 margin 值是.5em，如果滚动条是由<body>标签产生的，那么效果应该如图 6-27 所示这般边缘留有间隙。但是最后实现结果却是图 6-28 所示的这样没有间隙。注意，上述规则只对 PC 端有效，对于移动端并不一定适用。例如，在 PC 端，对<html>标签设置 overflow:hidden 可以隐藏滚动条禁止滚动，但是在移动端基本上无效。在 PC 端，窗体滚动高度可以使用 document.documentElement.scrollTop 获取，但是在移动端，可能就要使用 document.body.scrollTop 获取。
 > + （2）滚动条会占用容器的可用宽度或高度。
+> 滚动条是可以自定义的,倒是支持-webkit-前缀的浏览器可以说说。例如，对于 Chrome 浏览器：
+> + 整体部分，::-webkit-scrollbar；
+> + 两端按钮，::-webkit-scrollbar-button；
+> + 外层轨道，::-webkit-scrollbar-track；
+> + 内层轨道，::-webkit-scrollbar-track-piece；
+> + 滚动滑块，::-webkit-scrollbar-thumb；
+> + 边角，::-webkit-scrollbar-corner。
+
+#### 依赖 overflow 的样式表现
