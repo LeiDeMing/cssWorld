@@ -209,3 +209,20 @@
 > + 边角，::-webkit-scrollbar-corner。
 
 #### 依赖 overflow 的样式表现
+> 在 CSS 世界中，很多属性要想生效都必须要有其他 CSS 属性配合，其中有一种效果就离不开 overflow:hidden 声明，即单行文字溢出点点点效果。虽然效果的核心是 textoverflow:ellipsis，效果实现必需的 3 个声明如下：
+
+    .ell { 
+        text-overflow: ellipsis; 
+        white-space: nowrap; 
+        overflow: hidden; 
+    }
+
+> 目前，对-webkit-私有前缀支持良好的浏览器还可以实现多行文字打点效果，但是却无须依赖 overflow:hidden。比方说，最多显示 2 行内容，再多就打点的核心 CSS 代码如下：
+
+    .ell-rows-2 { 
+         display: -webkit-box; 
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+#### overflow 与锚点定位
