@@ -313,3 +313,8 @@
 > 此方法兼容性很好，层级单纯，唯一的问题就是插入了一个空格，会占据一定的高度，这是不推荐的，最好就是有没有“返回顶部”等元素都不影响主结构的布局。所以，我们要把占据的高度抹掉，方法很简单，设置 height：0 同时 overflow:hidden 即可,此时，有人可能会惊呼：什么？设置 height:0 同时 overflow:hidden？那岂不是里面所有元素都被剪裁看不见啦？如果是普通元素确实会如此，但是对于 absolute 绝对定位以及 fixed 固定定位元素，规则要更复杂！
 
 ### absolute 与 overflow
+> 上面这句话是官方文档的直译，似乎还是有些拗口，我们再换一种方法表述就是：如果overflow 不是定位元素，同时绝对定位元素和 overflow 容器之间也没有定位元素，则overflow 无法对 absolute 元素进行剪裁
+> 如果 overflow 的属性值不是 hidden 而是 auto 或者 scroll，即使绝对定位元素高宽比 overflow 元素高宽还要大，也都不会出现滚动条
+> transform 除了改变 overflow 属性原有规则，对层叠上下文以及 position:fixed 的渲染都有影响。因此，当大家遇到 absolute 元素被剪裁或者 fixed 固定定位失效时，可以看看是不是 transform 属性在作祟
+
+### absolute 与 clip
