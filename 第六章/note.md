@@ -348,3 +348,7 @@
 
 ### absolute 的流体特性
 #### 当 absolute 遇到 left/top/right/bottom 属性
+> 当 absolute 遇到 left/top/right/bottom 属性的时候，absolute 元素才真正变成绝对定位元素
+
+#### absolute 的流体特性
+> 说到流体特性，我们通常第一反应就是\<div>之类的普通块级元素。实际上，绝对定位元素也具有类似的流体特性，当然，不是默认就有的，而是在特定条件下才具有，这个条件就是“对立方向同时发生定位的时候”
