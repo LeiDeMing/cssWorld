@@ -329,3 +329,22 @@
 > + 2．最佳可访问性隐藏
 
 #### 深入了解 clip 的渲染
+> 我们先看一个示例：
+
+    .box { 
+        width: 300px; height: 100px; 
+        background-color: #f0f3f9; 
+        position: relative; 
+        overflow: auto; 
+    } 
+    .box > img { 
+        width: 256px; height: 192px; 
+        position: absolute; 
+    }
+
+> 如果对图片进行 clip 剪裁，那效果又将怎样呢？图片显然看不见了，但是注意，在 Chrome 浏览器下，.box 元素的滚动条依旧存在.
+> 这个现象很有意思，它说明，至少在 Chrome 浏览器下，clip 仅仅是决定了哪一部分是可见的，对于原来占据的空间并无影响。然而，并不是所有浏览器都这么认为，在 IE 和 Firefox浏览器下是没有滚动条的，只有光秃秃的一小撮背景色在那里。这又是“未定义行为”的表现，看起来 IE 和 Firefox 对于 clip 渲染采用的是另外的方式
+> 但是无论怎样，下面这些特性大家的认识都是一致的：使用 clip 进行剪裁的元素其clientWidth 和 clientHeight 包括样式计算的宽高都还是原来的大小，从这一点看，Chrome的渲染似乎更合理。虽然尺寸还是原来的尺寸，但是，隐藏的区域是无法影响我们的点击行为的，说明 clip 隐藏还是很干脆的。
+
+### absolute 的流体特性
+#### 当 absolute 遇到 left/top/right/bottom 属性
