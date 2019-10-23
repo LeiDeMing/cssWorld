@@ -318,3 +318,14 @@
 > transform 除了改变 overflow 属性原有规则，对层叠上下文以及 position:fixed 的渲染都有影响。因此，当大家遇到 absolute 元素被剪裁或者 fixed 固定定位失效时，可以看看是不是 transform 属性在作祟
 
 ### absolute 与 clip
+> CSS 世界中有些属性或者特性必须和其他属性一起使用才有效，比方说剪裁属性 clip。clip 属性要想起作用，元素必须是绝对定位或者固定定位，也就是 position 属性值必须是absolute 或者 fixed。
+> 那具体是如何剪裁的呢？我们看一个例子，CSS 如下：[如图](https://ws1.sinaimg.cn/large/0060ZzrAgy1g8819vjvh4j307b06jmx0.jpg)
+
+    clip: rect(30px 200px 200px 20px)
+
+#### 重新认识的 clip 属性
+> 在以下两种场景下具有不可替代的地位
+> + 1．fixed 固定定位的剪裁
+> + 2．最佳可访问性隐藏
+
+#### 深入了解 clip 的渲染
