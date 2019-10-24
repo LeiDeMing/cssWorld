@@ -379,3 +379,27 @@
 
 ### position:relative 才是大哥
 #### relative 对 absolute 的限制
+> 下面举个简单例子示意一下 relative 对 absolute 的限制。下面的 CSS 代码之前出现过，是冲着覆盖整个浏览器可视窗体去的，这出手甚为霸气。
+
+    .box { 
+        position: absolute; 
+        left: 0; right: 0; top: 0; bottom: 0; 
+    }
+
+> 现在有如下的小图标样式：
+
+    .icon { 
+        width: 20px; height: 20px; 
+        position: relative; 
+    }
+
+> 并且 HTML 结构关系如下：
+
+    <div class="icon"> 
+        <div class="box"></div> 
+    </div>  
+
+> 原本霸气的窗体尺寸一下子被限制到这里的小不溜丢的 20px×20px，瞬间从天上掉到地上。最根本的原因是，此时.box 元素的包含块变成了.icon。
+
+#### relative 与定位
+> relative 的定位有两大特性：一是相对自身；二是无侵入
