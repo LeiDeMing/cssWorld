@@ -373,3 +373,9 @@
 
 #### absolute 的 margin:auto 居中
  >当绝对定位元素处于流体状态的时候，各个盒模型相关属性的解析和普通流体元素都是一模一样的，margin 负值可以让元素的尺寸更大，并且可以使用 margin:auto 让绝对定位元素保持居中。
+> 绝对定位元素的 margin:auto 的填充规则和普通流体元素的一模一样：
+> + 如果一侧定值，一侧 auto，auto 为剩余空间大小；
+> + 如果两侧均是 auto，则平分剩余空间。
+
+### position:relative 才是大哥
+#### relative 对 absolute 的限制
