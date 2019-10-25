@@ -414,3 +414,26 @@
 > 因为一个普通元素变成相对定位元素，看上去长相什么的没有变化，但是实际上元素的层叠顺序提高了，甚至在 IE6 和 IE7 浏览器下无须设置 z-index 就直接创建了新的层叠上下文，会导致一些绝对定位浮层无论怎么设置 z-index 都会被其他元素覆盖。当然，z-index 无效已经算是比较严重的问题了。
 
 ### 强悍的 position:fixed 固定定位
+> 根本原本是其“包含块”和其他元素不一样。
+
+#### position:fixed 不一样的“包含块”
+> position:fixed 固定定位元素的“包含块”是根元素，我们可以将其近似看成\<html>元素。换句话说，唯一可以限制固定定位元素的就是\<html>根元素，而根元素就这么一个，也就是全世界只有一个人能限制 position:fixed 元素，可见人家强悍还是有强悍的资本的。
+> 所以，如果想把某个元素固定定位在某个模块的右上角，下面这种做法是没有用的：
+
+    <div class="father"> 
+        <div class="son"></div> 
+    </div> 
+    .father { 
+        width: 300px; height: 200px; 
+        position: relative; 
+    } 
+    .son { 
+     width: 40px; height: 40px; 
+        position: fixed; 
+        top: 0; right: 0; 
+    }
+
+> .son 元素只会跑到窗体的右上角，是不会在.father 的右上角的，relative 对 fixed定位没有任何限制作用。
+> 和“无依赖的绝对定位”类似，就是“无依赖的固定定位”，利用 absolute/fixed 元素没有设置 left/top/right/bottom 的相对定位特性，可以将目标元素定位到我们想要的位置，[处理如下](https://ws1.sinaimg.cn/large/0060ZzrAgy1g8abqc4m04j30a80cr3z1.jpg)
+
+#### position:fixed 的 absolute 模拟s
