@@ -37,3 +37,15 @@
 > + （1）天生派：页面根元素天生具有层叠上下文，称为根层叠上下文。
 > + （2）正统派：z-index 值为数值的定位元素的传统“层叠上下文”。
 > + （3）扩招派：其他 CSS3 属性。
+
+> 3．CSS3 与新时代的层叠上下文
+> + （1）元素为 flex 布局元素（父元素 display:flex|inline-flex），同时 z-index值不是 auto。
+> + （2）元素的 opacity 值不是 1。
+> + （3）元素的 transform 值不是 none。
+> + （4）元素 mix-blend-mode 值不是 normal。
+> + （5）元素的 filter 值不是 none。
+> + （6）元素的 isolation 值是 isolate。
+> + （7）元素的 will-change 属性值为上面 2～6 的任意一个（如 will-change:opacity、will-chang:transform 等）。
+> + （8）元素的-webkit-overflow-scrolling 设为 touch。
+
+#### 层叠上下文与层叠顺序
