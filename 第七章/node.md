@@ -49,3 +49,6 @@
 > + （8）元素的-webkit-overflow-scrolling 设为 touch。
 
 #### 层叠上下文与层叠顺序
+> 本章多次提到，一旦普通元素具有了层叠上下文，其层叠顺序就会变高。那它的层叠顺序究竟在哪个位置、哪个级别呢？
+> + （1）如果层叠上下文元素不依赖 z-index 数值，则其层叠顺序是 z-index:auto，可看成 z:index:0 级别；
+> + （2）如果层叠上下文元素依赖 z-index 数值，则其层叠顺序由 z-index 值决定。我们上面提供的层叠顺序图实际上还缺少其他重要信息。我又花工夫重新绘制了一个更完整的 7 阶层叠顺序图，[如图](https://ws1.sinaimg.cn/large/0060ZzrAgy1g8e9tffd2tj30ir0ajtae.jpg)
