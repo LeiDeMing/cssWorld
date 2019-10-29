@@ -139,3 +139,8 @@
 > 差别在于：italic 是使用当前字体的斜体字体，而 oblique 只是单纯地让文字倾斜。如果当前字体没有对应的斜体字体，则退而求其次，解析为 oblique，也就是单纯形状倾斜
 
 #### 不适合国情的 font-variant
+> font-variant 是一个从 IE6 时代就过来的 CSS 属性，对于我们大中华用户，其支持的属性值和作用让我们这些汉字用户觉得有些头疼，实现小体型大写字母，两个属性值要么 normal，要么 small-caps，font-variant:small-caps 就是可以让英文字符表现为小体型大写字母。代码示意如下：
+
+    http://www.<span style="font-variant:small-caps">css-world.com</span>/
+
+> 结果如下：
