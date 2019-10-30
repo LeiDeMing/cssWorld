@@ -162,3 +162,17 @@ font-family ],||表示或，?和正则表达式中的?的含义一致，表示 0
 > + 方法二：利用@font face 规则将我们的字体列表重定义为一个字体，这是兼容性很好、效益很高的一种解决方法，会在 8.5 节详细介绍。
 
 #### 使用关键字值的 font 属性
+> font 属性除了缩写用法，还支持关键字属性值，这个怕是很多人都不知道的。其语法如下：font:caption | icon | menu | message-box | small-caption | status-bar
+> 如果将 font 属性设置为上面的一个值，就等同于设置 font 为操作系统该部件对应的font，也就是说直接使用系统字体。
+> 根据 W3C 官方维基的解释，以及我自己在 Windows 系统下的测试，各个关键字的含义如下。
+> + caption：活动窗口标题栏使用的字体。
+> + icon：包含图标内容所使用的字体，如所有文件夹名称、文件名称、磁盘名称，甚至浏览器窗口标题所使用的字体。
+> + menu：菜单使用的字体，如文件夹菜单。
+> + message-box：消息盒里面使用的字体。
+> + small-caption：调色板标题所使用的字体。
+> + status-bar：窗体状态栏使用的字体。
+> 需要注意的是，使用关键字作为属性值的时候必须是独立的，不能添加 font-family 或 者 font-size 之类的，这和 font 属性缩写不是一个路子。
+> 通过设置修改 Windows 系统相关控件的默认字体我发现，这次是 Chrome浏览器拖了后腿。caption、icon、message-box 这 3 个关键字在 Windows 系统下的Chrome 浏览器中似乎是无效的，
+> 除了 caption、icon、menu、message-box、small-caption 和 status-bar，还有很多其他非标准的关键字，如 button、checkbox、checkbox-group、combo-box、desktop、dialog、document、field、hyperlink、list-menu、menu-item、menubar、outline-tree 、 password 、 pop-up-menu 、 pull-down-menu 、 push-button 、radio-button、radio-group、range、signature、tab、tooltip、window 和workspace。不过，这些关键字浏览器大多不支持，尽管 Firefox 浏览器支持一部分，但是需要添加私有前缀-moz-。例如：font: -moz-button;
+
+#### font 关键字属性值的应用价值
