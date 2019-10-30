@@ -294,4 +294,6 @@ font-family ],||表示或，?和正则表达式中的?的含义一致，表示 0
     }
 
 ##### 3．font-style
-> @font face 规则中的 font-style 和 font-weight 类似，都是用来设置对应字体样
+> @font face 规则中的 font-style 和 font-weight 类似，都是用来设置对应字体样式或字重下该使用什么字体。因为有些字体可能会有专门的斜体字体，注意这个斜体字体并不是让文字的形状倾斜，而是专门设计的倾斜的字体，所以很多细节会跟物理上的请求不一样。于是，我在 CSS 代码中使用 font-style:italic 的时候，就会调用这个对应字体，如下意：
+
+##### 4．font-weight
