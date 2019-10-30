@@ -144,3 +144,6 @@
     http://www.<span style="font-variant:small-caps">css-world.com</span>/
 
 > 结果如下：
+
+### font 属性
+#### 作为缩写的 font 属性
