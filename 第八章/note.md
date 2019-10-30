@@ -147,3 +147,18 @@
 
 ### font 属性
 #### 作为缩写的 font 属性
+> 完整语法为：[ [ font-style || font-variant || font-weight ]? font-size [ / line-height ]? 
+font-family ],||表示或，?和正则表达式中的?的含义一致，表示 0 个或 1 个
+> 仔细观察上面的语法，会发现font-size 和font-family 后面没有问号，也就是说是必需的，是不可以省略的。这和background属性不一样，background 属性虽然也支持缩写，但是并没有需要两个属性值同时存在的限制。
+> 因此，如果你的 font 属性缩写无效，检查一下 font-size 和 font-family 这两个属性是否同时存在
+> 每次 font 缩写后面都挂一个长长的字体列表，令人很是不悦，有什么小技巧可以避免吗？
+> + 方法一：我们可以随便找一个系统根本不存在的字体名占位，如字母 a，或者特殊一点，用笑脸表情☺，然后再设置 font-family:inherit 来重置这个占位字体。例如，我们想把字号和行高合并缩写，就可以这样：
+
+    .font { 
+        font: 30px/30px '☺';
+        font-family: inherit; 
+    }
+
+> + 方法二：利用@font face 规则将我们的字体列表重定义为一个字体，这是兼容性很好、效益很高的一种解决方法，会在 8.5 节详细介绍。
+
+#### 使用关键字值的 font 属性
