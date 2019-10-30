@@ -266,3 +266,32 @@ font-family ],||表示或，?和正则表达式中的?的含义一致，表示 0
 
 > 由于 IE6～IE8 不认识功能符，于是下面一个 src 被完美避开了。此时，IE9 浏览器就可以正大光明地享用 woff 字体格式了！
 > font-weight:normal 和 font-style:normal 是不是多余的？我的回答是，如果你没有同字体名的多字体设置，则它就是多余的，至少我在常规项目中删掉这两行 CSS 没有出现任何异常
+> 最后的问题是：format()功能符有什么作用，可不可以省略？我的回答是最好不要省略。format()功能符的作用是让浏览器提前知道字体的格式，以决定是否需要加载这个字体，而不是加载完了之后再自动判断。举个例子，下面的 CSS 代码在 Chrome 浏览器下就会同时加载eot 和 ttf 两种格式字体：
+
+    @font-face { 
+        font-family: ICON; 
+        src: url('icon.eot'), 
+        url('icon.ttf'); 
+    }
+
+> 浏览器对文件格式的判断不是基于后缀名，下面这种写法只会加载 ttf 这一种格式字体，因为浏览器提前知道了文件格式是自己无法识别的：
+
+    @font-face { 
+        font-family: ICON; 
+        src: url('icon.eot') format("embedded-opentype"), 
+        url('icon.ttf'); 
+    }
+
+> 于是，综合上面的全部知识会发现，业界常用的这套东西，其实可以优化成下面这样：
+
+    @font-face { 
+        font-family: ICON; 
+        src: url('icon.eot'); 
+        src: local('☺'),
+            url('icon.woff2') format("woff2"), 
+            url('icon.woff') format("woff"), 
+            url('icon.ttf'); 
+    }
+
+##### 3．font-style
+> @font face 规则中的 font-style 和 font-weight 类似，都是用来设置对应字体样
