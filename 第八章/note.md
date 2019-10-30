@@ -176,3 +176,93 @@ font-family ],||表示或，?和正则表达式中的?的含义一致，表示 0
 > 除了 caption、icon、menu、message-box、small-caption 和 status-bar，还有很多其他非标准的关键字，如 button、checkbox、checkbox-group、combo-box、desktop、dialog、document、field、hyperlink、list-menu、menu-item、menubar、outline-tree 、 password 、 pop-up-menu 、 pull-down-menu 、 push-button 、radio-button、radio-group、range、signature、tab、tooltip、window 和workspace。不过，这些关键字浏览器大多不支持，尽管 Firefox 浏览器支持一部分，但是需要添加私有前缀-moz-。例如：font: -moz-button;
 
 #### font 关键字属性值的应用价值
+> 目前，非常多网站的通用 font-family 直接就是：html { font-family: 'Microsoft YaHei'; }
+> 知道问题在哪里吗？这样一设置，就意味着所有操作系统下的所有浏览器都要使用“微软雅黑”字体。假如说用户的 iMac 或者 macbook 因为某些原因安装了“微软雅黑”字体，那岂不是这些系统原本更加漂亮的中文字体就不能使用了？
+> 于是，人们就会有这样的需求：希望非 Windows 系统下不要使用“微软雅黑”字体，而是使用其系统字体。怎么处理呢？一种方法是可以试试使用非标准的-apple-system 等关键字字体，具体方法如下：html { font-family: -apple-system, BlinkMacSystemFont, 'Microsoft YaHei'; }
+> 顺便多说两句，实际上还真有标准的系统字体关键字，叫作 system-ui，使用示例如下：html { font-family: system-ui; }
+> 压轴的总在最后，显然还有个更好的方法就是使用这里的 font 关键字，这是标准属性，10 年前浏览器就支持了，可以放心使用,CSS 代码如下（三选一即可）：
+
+    html { font: menu; } 
+    body { font-size: 16px; }
+
+    html { font: small-caption; } 
+    body { font-size: 16px; } 
+
+    html { font: status-bar; } 
+    body { font-size: 16px; }
+
+### 真正了解@font face 规则
+#### @font face 的本质是变量
+> 虽然说 CSS3 新世界中才出现真正意义上的变量 var，但实际上，在 CSS 世界中已经出现了本质上就是变量的东西，@font face 规则就是其中之一。@font face 本质上就是一个定义字体或字体集的变量，这个变量不仅仅是简单地自定义字体，还包括字体重命名、默认字体样式设置等。
+> @font face 规则支持的 CSS 属性有 font-family、src、font-style、font-weigh、unicode-range、font-variant、font-stretch 和 font-feature-settings。例如：
+
+    @font-face { 
+        font-family: 'example'; 
+        src: url(example.ttf); 
+        font-style: normal; 
+        font-weight: normal; 
+        unicode-range: U+0025-00FF; 
+        font-variant: small-caps; 
+        font-stretch: expanded; 
+        font-feature-settings："liga1" on; 
+    }
+
+> 属性还是挺多的，而且有些属性估计是他认识你，你不认识他。但是从实用角度来讲，有些属性其实可以不用去深究，比如 font-variant、font-stretch 和 font-featuresettings 这 3 个属性。为什么呢？因为按照我的经验，这 3 个属性给我感觉更像是专为英文设计的，所以如果不是有业务需要，可以先放一放。再加上后两个是 CSS3 新属性，本书就不做进一步介绍了,好，现在，是不是感觉压力一下子小了很多？我们需要在意的可以自定义的属性就只剩下下面这些：
+
+    @font-face { 
+        font-family: 'example'; 
+        src: url(example.ttf); 
+        font-style: normal; 
+        font-weight: normal; 
+        unicode-range: U+0025-00FF; 
+    }
+
+##### 1．font-family
+> 这里的 font-family 可以看成是一个字体变量，名称可以非常随意，如直接用一个美元符号'$'。例如：
+
+    @font-face { 
+        font-family: '$';
+        src: url(example.ttf); 
+    }
+
+> 虽然说自己变量名可以很随意，但是有一类名称不能随便设置，就是原本系统就有的字体名称。例如，如果使用下面的代码从此“微软雅黑”字体就变成了这里 example.ttf 对应的字体了。
+
+    @font-face { 
+        font-family: 'Microsoft Yahei'; 
+        src: url(example.ttf); 
+    }
+
+##### 2．src
+> src 表示引入的字体资源可以是系统字体，也可以是外链字体。如果是使用系统安装字体，则使用 local()功能符；如果是使用外链字体，则使用 url()功能符。由于 local()功能符IE9 及其以上版本浏览器才支持，非常实用，而本书目标浏览器包含 IE8 浏览器，因此不做展开，有兴趣的读者可以参考[博客文章](http://www.zhangxinxu.com/ wordpress/?p=6063)
+> 目前在业界，凡是使用自定义字体的，差不多都是下面这种格式：
+
+    @font-face { 
+        font-family: ICON; 
+        src: url('icon.eot') format('eot'); 
+        src: url('icon.eot?#iefix') format('embedded-opentype'), 
+            url('icon.woff2') format("woff2") 
+            url('icon.woff') format("woff"), 
+            url('icon.ttf') format("typetrue"), 
+            url('icon.svg#icon') format('svg'); 
+        font-weight: normal; 
+        font-style: normal; 
+    }
+
+> 上面这段 CSS 代码一共出现了 5 种字体格式，分别是.eot、.woff2、.woff、.ttf 和.svg。
+> + svg 格式是为了兼容 iOS 4.1 及其之前的版本，考虑到现如今 iOS 的版本数已经翻了一番，所以 svg 格式的兼容代码大可舍弃。
+> + eot 格式是 IE 私有的。注意，目前所有版本的 IE 浏览器都支持 eot 格式，并不是只有 IE6～IE8 支持。只是，IE6～IE8 仅支持 eot 这一种字体格式。
+> + woff 是 web open font format 几个词的首字母简写，是专门为 Web 开发而设计的字体格式，显然是优先使用的字体格式，其字体尺寸更小，加载更快。Android 4.4 开始全面支持。
+> + woff2 是比 woff 尺寸更小的字体，小得非常明显。因此，Web 开发第一首选字体就是 woff2，只是此字体目前仅 Chrome 和 Firefox 支持得比较好。• ttf 格式作为系统安装字体比较多，Web 开发也能用，就是尺寸大了点儿，优点在于老版本 Android 也支持。
+> 但是，如果我们仔细看上面的代码就会发现，在IE 浏览器下，使用的永远是 eot 格式的字体（因为排在最前），而 woff 格式字体从 IE9 开始就支持了，浏览器好的特性都没用上啊！但是，我们又不能简单地把 woff 格式提前，否则会影响低版本 IE 浏览器的字体显示。怎么办呢？有一个小技巧如下
+
+    @font-face { 
+        font-family: ICON; 
+        src: url('icon.eot') format('eot'); 
+        src: local('☺'),
+            url('icon.woff2') format("woff2") 
+            rl('icon.woff') format("woff"), 
+            url('icon.ttf') format("typetrue"); 
+    }
+
+> 由于 IE6～IE8 不认识功能符，于是下面一个 src 被完美避开了。此时，IE9 浏览器就可以正大光明地享用 woff 字体格式了！
+> font-weight:normal 和 font-style:normal 是不是多余的？我的回答是，如果你没有同字体名的多字体设置，则它就是多余的，至少我在常规项目中删掉这两行 CSS 没有出现任何异常
