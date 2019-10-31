@@ -393,3 +393,16 @@ font-family ],||表示或，?和正则表达式中的?的含义一致，表示 0
     button + button { 
         margin-left: 20px; 
     }
+
+#### 了解 word-break 和 word-wrap 的区别
+> word-break几个关键字值的含义具体解释如下。
+> + normal：使用默认的换行规则。
+> + break-all：允许任意非 CJK（Chinese/Japanese/Korean）文本间的单词断行。
+> + keep-all：不允许 CJK 文本中的单词换行，只能在半角空格或连字符处换行。非 CJK
+文本的行为实际上和 normal 一致
+
+> word-wrap几个关键字值的含义具体解释如下。
+> + normal：就是大家平常见得最多的正常的换行规则。
+> + break-word：一行单词中实在没有其他靠谱的换行点的时候换行。
+> word-wrap 属性其实也是很有故事的，它之前由于和 word-break 长得太像，难免会让人记不住或搞混，于是在 CSS3 规范里，这个属性的名称被修改了，叫作 overflow-wrap
+> 下面回到重点：word-break:break-all 和 word-wrap:break-word。首先，两者长相神似，都有 word，都有 break，位置都还一样，一个有两个 break，一个有两个 word；其次，两者的功能作用也类似，这两个声明都能使连续英文字符换行，那么它们的区别到底是什么？[对比效果](http://demo.cssworld.cn/8/6-5.php)
