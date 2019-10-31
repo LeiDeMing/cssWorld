@@ -339,4 +339,18 @@ font-family ],||表示或，?和正则表达式中的?的含义一致，表示 0
 > 此时“坚挺”两个字绝对是纹丝不动，绝对定位具有包裹性，而子元素也是绝对定位的，hide-text 所在元素的“包含块”的宽度就是 0，此时 text-indent:100%计算值也是 0，文本缩进隐藏彻底失败
 > 与文本控制相关的 CSS 属性支持百分比值的并不多，例如，letter-spacing、word-spacing 和 text-shadow 等都不支持,例如，word-spacing 新草案增加了百分比值并且已有浏览器开始支持
 > text-indent 百分比值还有没有实际价值呢？从理论上讲，我们可以使用 textindent 实现宽度已知内联元素的居中效果，[例如](http://demo.cssworld.cn/8/6-2.php)
-> 另外，text-indent 还有一个比较生僻的应用。在 Chrome 浏览器下，如果\<img>标签没有设置 src 属性，则会出现一个灰色的线框
+> 另外，text-indent 还有一个比较生僻的应用。在 Chrome 浏览器下，如果\<img>标签没有设置 src 属性，则会出现一个灰色的线框,根据研究我发现，此灰色边框是预留给 alt 属性值用的，是内联水平元素，因此可以使用text-indent 属性隐藏之
+
+    img { 
+        text-indent: -400px; 
+        overflow: hidden; 
+    }
+
+> 小知识。
+> + （1）text-indent 仅对第一行内联盒子内容有效。
+> + （2）非替换元素以外的 display 计算值为 inline 的内联元素设置 text-indent 值无效，如果计算值是 inline-block/inline-table 则会生效。因此，如果父级块状元素设置了 text-indent 属性值，子 inline-block/inline-table 需要设置 text-indent:0重置。
+> + （3）\<input>标签按钮 text-indent 值无效。
+> + （4）\<button>标签按钮 text-indent 值有效，但是存在兼容性差异，IE 浏览器理解为单标签，百分比值按照容器计算，而 Chrome 和 Firefox 浏览器标签内还有其他 Shadow DOM 元素，因此百分比值是按照自身的尺寸计算的。
+> + （5）\<input>和\<textarea>输入框的 text-indent 在低版本 IE 浏览器下有兼容问题。
+
+#### letter-spacing
