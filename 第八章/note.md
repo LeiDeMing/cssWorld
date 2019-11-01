@@ -425,3 +425,12 @@ font-family ],||表示或，?和正则表达式中的?的含义一致，表示 0
 > + [演示页面](http://demo.cssworld.cn/8/6-6.php)
 
 #### text-align 与元素对齐
+> 就最终的渲染表现来看，Chrome 等浏览器应该对文本内容进行了算法区分，对 CJK 文本使用了 letter-spacing 间隔算法，而对非 CJK 文本使用的是 word-spacing 间隔算法，但 IE 浏览器则就一个 word-spacing 间隔算法。于是就会出现明明左右 padding 大小设置一样，结果右侧空白明显更大的尴尬问题
+> 不过，好在 IE 有一个私有的 CSS 属性 text-justify（目前也写入规范草案了）可以实现中文两端对齐的。于是，通过使用下面的 CSS 代码组合就可以实现全部浏览器都兼容的中文两端对齐效果,[http://demo.cssworld.cn/8/6-7.php](http://demo.cssworld.cn/8/6-7.php)
+
+    .justify { 
+        text-align: justify; 
+        text-justify: inter-ideograph; 
+    }
+
+> text-align:justify 除了实现文本的两端对齐，还可以实现容错性更强的两端对齐布局效果
