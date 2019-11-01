@@ -406,3 +406,12 @@ font-family ],||表示或，?和正则表达式中的?的含义一致，表示 0
 > + break-word：一行单词中实在没有其他靠谱的换行点的时候换行。
 > word-wrap 属性其实也是很有故事的，它之前由于和 word-break 长得太像，难免会让人记不住或搞混，于是在 CSS3 规范里，这个属性的名称被修改了，叫作 overflow-wrap
 > 下面回到重点：word-break:break-all 和 word-wrap:break-word。首先，两者长相神似，都有 word，都有 break，位置都还一样，一个有两个 break，一个有两个 word；其次，两者的功能作用也类似，这两个声明都能使连续英文字符换行，那么它们的区别到底是什么？[对比效果](http://demo.cssworld.cn/8/6-5.php)
+
+#### white-space 与换行和空格的控制
+##### white-space 的处理模型
+> white-space 属性声明了如何处理元素内的空白字符，这类空白字符包括 Space（空格）键、Enter（回车）键、Tab（制表符）键产生的空白。因此，white-space 可以决定图文内容是否在一行显示（回车空格是否生效），是否显示大段连续空白（空格是否生效）等,其属性值包括下面这些。[如图](https://ws1.sinaimg.cn/large/0060ZzrAgy1g8ifipqn1uj30oa06wjs9.jpg)
+> + normal：合并空白字符和换行符。
+> + pre：空白字符不合并，并且内容只在有换行符的地方换行。
+> + nowrap：该值和 normal 一样会合并空白字符，但不允许文本环绕。
+> + pre-wrap：空白字符不合并，并且内容只在有换行符的地方换行，同时允许文本环绕。
+> + pre-line：合并空白字符，但只在有换行符的地方换行，允许文本环绕。
