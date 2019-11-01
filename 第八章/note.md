@@ -433,4 +433,30 @@ font-family ],||表示或，?和正则表达式中的?的含义一致，表示 0
         text-justify: inter-ideograph; 
     }
 
-> text-align:justify 除了实现文本的两端对齐，还可以实现容错性更强的两端对齐布局效果
+> text-align:justify 除了实现文本的两端对齐，还可以实现容错性更强的两端对齐布局效果,HTML 结构如下：
+
+    <ul class="justify"> 
+    <li> 
+    <img src="1.jpg"> 
+    <p>图标描述 1</p>
+    </li> 
+    <li> 
+    <img src="1.jpg"> 
+    <p>图标描述 2</p>
+    </li> 
+    </ul>
+
+> 我们可以让\<li>列表 inline-block 化，然后 text-align:justify 一步到位即可实现两端对齐效果了！例如：
+
+    .justify { 
+        text-align: justify; 
+    } 
+    .justify li { 
+        display: inline-block;
+        text-align: center; 
+    }
+
+> 但结果却不是想象的那样，而是依旧左侧排列
+> 那是因为不足一行。在默认设置下，text-align:justify 要想有两端对齐的效果，需要满足两点：一是有分隔点，如空格；二是要超过一行，此时非最后一行内容会两端对齐。
+> 上面的例子满足了第一点，\<li>标签中间有换行符，在默认 white-space 属性下会转换成普通空格，但是并不满足第二点，内容并没有超过一行。这就难办了，我们的内容是固定的，不可能再加一个列表，就没有什么好方法了吗？
+> 关于上面的两端对齐案例，可以[手动输入](http://demo.cssworld.cn/8/6-8.php) 或者扫右侧的二维码进行体验
