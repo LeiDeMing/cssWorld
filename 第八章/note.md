@@ -462,3 +462,15 @@ font-family ],||表示或，?和正则表达式中的?的含义一致，表示 0
 > 关于上面的两端对齐案例，可以[手动输入](http://demo.cssworld.cn/8/6-8.php) 或者扫右侧的二维码进行体验
 
 #### 如何解决 text-decoration 下划线和文本重叠的问题
+> CSS 的 text-decoration:underline 可以给内联文本增加下划线就会发现，下划线经常会和中文文字的下边缘粘连在一起，英文的话甚至直接穿过，越看越有心痛的感觉。[如图](https://ws1.sinaimg.cn/large/0060ZzrAgy1g8knk5lwcnj30l701xglf.jpg)
+> 有。方法很多，例如，浏览器支持并不好的 text-decoration-skip 属性、CSS3 box-shadow 或者background-image 模拟，甚至可以走 canvas 和 SVG 滤镜
+> 转一圈后你会发现，最好的处理方法就是使用看似普通却功勋卓越的 border属性
+> text-decoration 除了支持下划线 underline，还支持上划线 overline 和中划线line-through
+> \<del>标签默认的 text-decoration 的属性值就是 line-through，因此类似原价删除效果
+> text-decoration 还支持同时设置多个属性。例如，上划线和下划线同时出现
+
+    a { 
+        text-decoration: underline overline; 
+    }
+
+> 在 CSS3 新世界中，text-decoration 还可以是波浪下划线，也可以指定下划线颜色等
