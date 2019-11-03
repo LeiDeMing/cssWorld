@@ -47,4 +47,8 @@
     positionX = (容器的宽度 - 图片的宽度) * percentX; 
     positionY = (容器的高度 - 图片的高度) * percentY;
 
-> background-repeat 与渲染性能
+#### background-repeat 与渲染性能
+> background-repeat 支持 repeat、repeat-x、repeat-y 这几个值
+> 然后有些人为了追求极致，就把 alpha.png 做成了 1 像素×1 像素大小，确实图片尺寸小了那么一点点，但是遮罩背景出现的时候会有明显的卡顿，体验非常不好。究其原因，就是平铺图片尺寸太小，平铺次数太多，渲染太吃力，其实我们大可把背景图保存成 100 像素×100 像素大小，这样一来，图片尺寸并没有大多少，但是渲染性能却有明显提升。
+
+#### 外强中干的 background-attachment:fixed
