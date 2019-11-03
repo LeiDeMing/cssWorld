@@ -41,3 +41,10 @@
 > 根据我的测试，一个元素如果 display 计算值为 none，在 IE 浏览器下（IE8～IE11，更高版本不确定）依然会发送图片请求，Firefox 浏览器不会，至于 Chrome 和 Safari 浏览器则似乎更加智能一点：如果隐藏元素同时又设置了 background-image，则图片依然会去加载；如果是父元素的 display 计算值为 none，则背景图不会请求，此时浏览器或许放心地认为这个背景图暂时是不会使用的。
 
 #### 与众不同的 background-position 百分比计算方式
+> \<position>值支持 1～4 个值，可以是具体数值，也可以是百分比值，还可以是 left、top、right、center 和 bottom 等关键字。[图](https://ws1.sinaimg.cn/large/0060ZzrAgy1g8kpd7ba7yj30hy0bbadk.jpg)
+> \<position>值的百分比值有着特殊的计算公式：
+
+    positionX = (容器的宽度 - 图片的宽度) * percentX; 
+    positionY = (容器的高度 - 图片的高度) * percentY;
+
+> background-repeat 与渲染性能
