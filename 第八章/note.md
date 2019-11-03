@@ -498,7 +498,21 @@ font-family ],||表示或，?和正则表达式中的?的含义一致，表示 0
 > + 首先，元素的 display 计算值必须是 block、inline-block、list-item、table-cell 或者 table-caption
 > + 此外，不是所有的字符都能单独作为::first-letter 伪元素存在的
 > + 这是因为常见的标点符号、各类括号和引号在::first-letter 伪元素眼中全部都是“辅助类”字符，有点 图 8-52 问号全部默认黑色儿买东西送赠品的感觉，但是赠品本身却不能购买，这里的问号“？”就属于赠品
-> “？？？？？？？辅”全部都成银色了！还挺有个性的，要么不变色，要变就一大波一起变。原因很简单，“辅助”二字才是::first-letter 伪元素真正要收入囊中作为“伪元素”的字符，但是现在前面出现了一堆它不感兴趣的问号，怎么办呢？那就当作赠品一并收了，于是，一大波字符全都成银色了。如果全是问号，因为没有主商品，自然也就无法获得赠品，所以::first-letter 没有选择任何字符，问号全部默认是黑色。
-> 有人可能会有疑问：那到底哪些字符属于“赠品”，哪些属于“商品”呢？我特意做了测试，总结下来就是，“赠品字符”包括·@#%&*()（）[]【】{}:："“”;；'‘’》《,，.。？?!！…*、/\
-> 最后说明一点，字符前面不能有图片或者 inline-block/inline-table 之类的元素存在。
-> 一般来讲，::before 伪元素和普通元素之间没有多少瓜葛，例如:first-child和:empty 之类的选择器都不受影响，但是，由于::first-letter 和::before 一样也是伪元素，“暗生情愫”也是难免的。翻译成 CSS 世界的术语就是：::before 伪元素也参与::first-letter 伪元素
+> + “？？？？？？？辅”全部都成银色了！还挺有个性的，要么不变色，要变就一大波一起变。原因很简单，“辅助”二字才是::first-letter 伪元素真正要收入囊中作为“伪元素”的字符，但是现在前面出现了一堆它不感兴趣的问号，怎么办呢？那就当作赠品一并收了，于是，一大波字符全都成银色了。如果全是问号，因为没有主商品，自然也就无法获得赠品，所以::first-letter 没有选择任何字符，问号全部默认是黑色。
+> + 有人可能会有疑问：那到底哪些字符属于“赠品”，哪些属于“商品”呢？我特意做了测试，总结下来就是，“赠品字符”包括·@#%&*()（）[]【】{}:："“”;；'‘’》《,，.。？?!！…*、/\
+> + 最后说明一点，字符前面不能有图片或者 inline-block/inline-table 之类的元素存在。
+> + 一般来讲，::before 伪元素和普通元素之间没有多少瓜葛，例如:first-child和:empty 之类的选择器都不受影响，但是，由于::first-letter 和::before 一样也是伪元素，“暗生情愫”也是难免的。翻译成 CSS 世界的术语就是：::before 伪元素也参与::first-letter 伪元素
+
+> 2．::first-letter 伪元素可以生效的 CSS 属性
+> + 如果字符被选作了::first-letter 伪元素，并不是像::before 伪元素那样，几乎所有 CSS 都有效，只是一部分有效。
+> + 所有字体相关属性：font、font-style、font-variant、font-weight、
+font-size、line-height 和 font-family。 
+> + 所有背景相关属性：background-color、background-image、backgroundposition、background-repeat、background-size 和 background-attachment。 
+> + 所有 margin 相关属性：margin、margin-top、margin-right、margin-bottom
+和 margin-left。 
+> + 所有 padding 相关属性：padding、padding-top、padding-right、paddingbottom 和 padding-left。 > + 所有 border 相关属性：缩写的 border、border-style、border-color、
+border-width 和普通书写的属性。
+> + color 属性。
+> + text-decoration、text-transform、letter-spacing、word-spacing（合
+适情境下）、line-height、float 和 vertical-align（只有当 float 为 none
+的时候）等属性。
