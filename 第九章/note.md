@@ -24,3 +24,17 @@
 > （2）系统颜色名称都比较高冷，非常适合作为变量，替换时不会发生冲突。于是，当我们选取某一颜色后，只要把所有 CSS 中的系统颜色变量替换成选中的色值，任意组装的模块的即时配色的效果就实现了
 
 ### CSS 世界的 background 很单调
+> CSS 世界中的 background 大部分有意思的内容都是在 CSS3 新世界中才出现的，如Multiple backgrounds（多背景）、background-size（背景尺寸）、background-origin（背景初始定位盒子）、background-clip（背景剪切盒子）等
+> 当我们使用 background 属性的时候，实际上使用的是一系列 background 相关属性的集合，包括：
+> + background-image: none
+> + background-position: 0% 0%
+> + background-repeat: repeat
+> + background-attachment: scroll
+> + background-color: transparent
+
+> 如果是 IE9+浏览器，则还包括
+> + background-size: auto auto
+> + background-origin: padding-box
+> + background-clip: border-box
+
+#### 隐藏元素的 background-image 到底加不加载
