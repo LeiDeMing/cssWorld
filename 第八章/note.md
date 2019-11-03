@@ -529,3 +529,17 @@ border-width 和普通书写的属性。
         font-size: xx-large; 
         vertical-align: -2px; 
     }
+
+#### 故事相对较少的:first-line 伪元素
+> :first-line 和:first-letter 伪元素一样，IE9 及以上版本浏览器支持双冒号::first-line{}写法，IE8 浏览器只认识单冒号写法。
+> :first-line 和:first-letter 伪元素一样，只能作用在块级元素上，也就是display 为 block、inline-block、list-item、table-cell 或者 tablecaption 的元素设置:first-line 才有效，table、flex 之类都是无效的。
+> :first-line 和:first-letter 伪元素一样，仅支持部分 CSS 属性，例如:
+> + 所有字体相关属性；
+> + color 属性；
+> + 所有背景相关属性；
+> + text-decoration、text-transfor、letter-spacing、word-spacing、
+line-height 和 vertical-align 等属性。
+> :first-line 和:first-letter 伪元素一样，color 等继承属性的权重总是多了一层，毕竟称为“伪元素”，就好像里面还有个子元素。如果:first-line 和:firstletter 同时设置颜色，:first-letter 级别比:first-line 高，即使:firstline 至加!important（如果浏览器支持）也是如此
+> :first-line 和:first-letter 伪元素一样，也支持标签嵌套，但是具体细则和:first-letter 出入较大，例如，它不支持 table 相关属性等
+> [demo](http://demo.cssworld.cn/8/7-2.php)
+> 因此，如果想使用:first-line，首行内容不能混入 inline-block/inline-table 元素
