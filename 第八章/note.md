@@ -474,3 +474,22 @@ font-family ],||表示或，?和正则表达式中的?的含义一致，表示 0
     }
 
 > 在 CSS3 新世界中，text-decoration 还可以是波浪下划线，也可以指定下划线颜色等
+
+#### 一本万利的 text-transform 字符大小写
+> text-transform 也是为英文字符设计的，要么全大写 text-transform:uppercase，要么全小写 text-transform:lowercase，似乎没什么值得挖掘的，但有一些场景使用它却会有一本万利的效果
+> + 1．场景一：身份证输入
+> + + 我国的身份证最后一位有可能是字母 X，且各种场合都是指定必须大写。如果我们给输入身份证的\<input>输入框设置：
+
+    input { 
+        text-transform: uppercase; 
+    }
+
+> + 2．场景二：验证码输入,设想一下，如果这里有下面这样的设置：
+
+    input { 
+        text-transform: uppercase;
+    }
+
+> 用户惴惴不安的小心思根本就不会出现，因为用户输入小写字母的时候，输入框里面出现的就是和验证码一样的大写内容。
+
+### 了解:first-letter/:first-line 伪元素
