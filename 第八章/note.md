@@ -516,3 +516,7 @@ border-width 和普通书写的属性。
 > + text-decoration、text-transform、letter-spacing、word-spacing（合
 适情境下）、line-height、float 和 vertical-align（只有当 float 为 none
 的时候）等属性。
+
+> 3．::first-letter 伪元素的一些有意思的特点
+> + （1）支持部分 display 属性值标签嵌套[demo](http://demo.cssworld.cn/8/7-1.php)
+> + （2）颜色等权重总是多了一层,[解释](https://ws1.sinaimg.cn/large/0060ZzrAgy1g8koarw5fzj30ox05awh7.jpg)
