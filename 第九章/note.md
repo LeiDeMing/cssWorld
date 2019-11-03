@@ -9,3 +9,6 @@
 
 #### 不支持的 transparent 关键字
 > transparent 关键字是一个很有意思的关键字，background-color:transparent包括 IE6 浏览器都支持，border-color:transparent 从 IE7 浏览器开始支持，但是 color: transparent 却从 IE9 浏览器才开始支持。
+
+#### 不支持的 currentColor 变量
+> 实际上，CSS 中很多属性值默认就是 currentColor 的表现
