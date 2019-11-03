@@ -520,3 +520,12 @@ border-width 和普通书写的属性。
 > 3．::first-letter 伪元素的一些有意思的特点
 > + （1）支持部分 display 属性值标签嵌套[demo](http://demo.cssworld.cn/8/7-1.php)
 > + （2）颜色等权重总是多了一层,[解释](https://ws1.sinaimg.cn/large/0060ZzrAgy1g8koarw5fzj30ox05awh7.jpg)
+
+> 4．::first-letter 实际应用举例
+> 电商产品经常会有价格，价格前面一般都有一个¥符号，这个符号字体往往会比较特殊，字号也比较大，同时和文字的数值有几像素的距离。要实现这样的效果，通常的做法是在¥符号外面包一个 span 标签，命名一个类名，然后通过 CSS 控制。实际上，还有更简单巧妙的方法，就是使用本文介绍的::first-letter 伪元素
+
+    .price:first-letter { 
+        margin-right: 5px; 
+        font-size: xx-large; 
+        vertical-align: -2px; 
+    }
