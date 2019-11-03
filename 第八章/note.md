@@ -543,3 +543,5 @@ line-height 和 vertical-align 等属性。
 > :first-line 和:first-letter 伪元素一样，也支持标签嵌套，但是具体细则和:first-letter 出入较大，例如，它不支持 table 相关属性等
 > [demo](http://demo.cssworld.cn/8/7-2.php)
 > 因此，如果想使用:first-line，首行内容不能混入 inline-block/inline-table 元素
+
+> ::first-line 实际应用举例 见书279
