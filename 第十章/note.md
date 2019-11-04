@@ -64,3 +64,27 @@
         opacity: 0; 
         filter: Alpha(opacity=0); 
     }
+
+### display 与元素的显隐
+> 对一个元素而言，如果 display 计算值是 none 则该元素以及所有后代元素都隐藏，如果是其他 display 计算值则显示。
+> 在 Firefox 浏览器下，display:none 的元素的 background-image 图片是不加载的，包括父元素 display:none 也是如此；如果是 Chrome 和 Safari 浏览器，则要分情况，若父元素 display:none，图片不加载，若本身背景图所在元素隐藏，则图片依旧会去加载；对 IE浏览器而言，无论怎样都会请求图片资源
+> 另外，如果不是 background-image 图片，而是\<img>元素，则设置 display:none 在所有浏览器下依旧都会请求图片资源。
+> HTML 中有很多标签和属性天然 display:none，如\<style>、\<script>和 HTML5中的\<dialog>元素（如果浏览器支持）。如果这些标签在\<body>元素中，设置 display: lock 是可以让内联 CSS 和 JavaScript 代码直接在页面中显示的。例如：,页面上就会出现.l { float: left; }的文本信息；如果再设置 contenteditable= "true"，在有些浏览器下（如 Chrome），甚至可以直接实时编辑预览页面的样式。
+
+    <style style="display:block;"> 
+        .l { float: left; } 
+    </style>
+
+> 还有一些属性也是天然 display:none 的。例如，hidden 类型的\<input>输入框：
+
+    <input type="hidden" name="id" value="1">
+
+> HTML5 中新增了 hidden 这个布尔属性，可以让元素天生 display:none 隐藏。IE11 以及其他现代浏览器都支持它，因此，如果要兼容桌面端，需要如下 CSS 设置：
+
+    [hidden] { 
+        display: none; 
+    }
+
+> display:none 显隐控制并不会影响 CSS3 animation 动画的实现，但是会影响 CSS3 transition 过渡效果执行，因此 transition 往往和 visibility 属性走得比较近。
+
+### visibility 与元素的显隐
