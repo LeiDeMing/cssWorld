@@ -58,3 +58,21 @@
 #### background-color 背景色永远是最低的
 
 #### 利用多背景的属性 hack 小技巧
+> 虽然 IE8 浏览器并不支持多背景，但是并不表示 IE8 浏览器和多背景效果无缘。因为 IE8浏览器支持:before 和:after 两个伪元素，所以配合 z-index 负值，我们可以实现最多 3个图片的多背景效果，对绝大部分的需求来说足够了
+> 常用的:root .ie9 {} hack 技巧会提高元素的权重，并不是一个完美的方法，而巧用一些 CSS3 属性或属性值做兼容处理则是上乘的技术策略。例如，这里就可以这样处理：
+
+    .bg { 
+        background: url(icon.png); 
+        background: url(icon.svg), none; 
+    }
+
+> IE8 浏览器不认识多背景的写法，自然会忽略第二行声明，只认第一行的 PNG 背景，IE9及以上版本浏览器则会使用后面的声明使用 SVG 图片
+> 趁热打铁，请问如果要区分 IE9 及以下版本和 IE10 及以上版本，该怎么办呢？我们可以这么处理,IE9 不认识 CSS3 渐变，因此会忽略第二行 CSS 声明。
+
+    .bg { 
+        background: url(loading.gif); 
+        background: url(loading.png), linear-gradient(to top, transparent, transparent); 
+    }
+
+#### 渐变背景和 rgba 背景色的兼容处理
+> ie9 ie8相关内容 290~291
