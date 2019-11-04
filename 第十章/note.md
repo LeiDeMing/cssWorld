@@ -88,3 +88,9 @@
 > display:none 显隐控制并不会影响 CSS3 animation 动画的实现，但是会影响 CSS3 transition 过渡效果执行，因此 transition 往往和 visibility 属性走得比较近。
 
 ### visibility 与元素的显隐
+#### 不仅仅是保留空间这么简单
+> 有一些人简单地认为 display:none 和 visibility:hidden 两个隐藏的区别就在于：display:none 隐藏后的元素不占据任何空间，而 visibility:hidden 隐藏的元素空间依旧保留。实际上并没有这么简单，visibility 是一个非常有故事的属性。
+> + 1．visibility 的继承性
+> + visibility 与 CSS 计数器
+> + 3．visibility 与 transitio(这是为什么呢？因为 CSS3 transition 支持的 CSS 属性中有 visibility，但是并没有 display。)由于 transition 可以延时执行，因此，和 visibility 配合可以使用纯 CSS 实现 hover延时显示效果，由此提升我们的交互体验
+> transition 隐藏除了和 transition 友好外，与 display:none 相比，其在 JavaScript也更加友好。存在这样的场景：我们需要对隐藏元素进行尺寸和位置的获取，以便对交互布局进行精准定位。此时，建议使用 visibility 隐藏,原因是，我们可以准确计算出元素的尺寸和位置，如果使用的是 display:none，则无论是尺寸还是位置都会是0，计算就会不准确
