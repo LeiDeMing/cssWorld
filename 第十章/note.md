@@ -94,3 +94,20 @@
 > + visibility 与 CSS 计数器
 > + 3．visibility 与 transitio(这是为什么呢？因为 CSS3 transition 支持的 CSS 属性中有 visibility，但是并没有 display。)由于 transition 可以延时执行，因此，和 visibility 配合可以使用纯 CSS 实现 hover延时显示效果，由此提升我们的交互体验
 > transition 隐藏除了和 transition 友好外，与 display:none 相比，其在 JavaScript也更加友好。存在这样的场景：我们需要对隐藏元素进行尺寸和位置的获取，以便对交互布局进行精准定位。此时，建议使用 visibility 隐藏,原因是，我们可以准确计算出元素的尺寸和位置，如果使用的是 display:none，则无论是尺寸还是位置都会是0，计算就会不准确
+> 不仅如此，transition 隐藏在无障碍访问这一块也比 display:none 更友好些。举个例子，对于一个点击遮罩层就隐藏遮罩层的交互，很多人可能是这么实现的
+
+    overlay.onclick = function () { 
+        this.style.display = 'none'; 
+    };
+
+> 如果不考虑无障碍访问，这么实现也算干脆利落；但如果要兼顾无障碍访问，则使用 display:none 就没有使用 visibility 友好了。
+> 视觉障碍用户对页面状态变化都是通过声音而非视觉感知，因此，就有必要告知准确的状态信息。下面就是遮罩浮层的一些描述，显示时和隐藏时分别如下：
+
+    <div class="overlay" role="button" title="点击关闭浮层"></div> 
+    <div class="overlay hidden" role="button" title="浮层已关闭"></div>
+
+> [演示页面](http://demo.cssworld.cn/10/2-4.php)
+> 最后，有必要强调一下可能出现的误区。
+> + （1）普通元素的 title 属性是不会被朗读的，除非辅以按钮等控件元素，这里是因为设置了 role="button"所以才可以朗读。
+> + （2）visibility:hidden 元素是不会被朗读的，注意，不会被朗读！本案例之所以会被朗读，从显示到隐藏，遮罩层 focus 的区域还在（display:none 则丢失，因为尺寸位置全部变成 0），你可以理解为遮罩层的“遗骸”还在。
+> + 朗读结束后再去触碰这片区域的时候，是无论如何也找不到已经 visibility:hidden的这个遮罩元素的。
