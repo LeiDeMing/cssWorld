@@ -54,3 +54,5 @@
 #### 外强中干的 background-attachment:fixed
 > 在 CSS 世界中，background-attachment 支持 scroll 和 fixed两个属性值，其中 scroll 是默认值，就是平常使用背景图的效果表现；fixed 表示背景相对于当前文档视区定位，也就是页面再怎么滚动背景图片位置依旧纹丝不动，稳若泰山
 > 见书288~289
+
+#### background-color 背景色永远是最低的
