@@ -50,3 +50,5 @@
 > + [（2）普通块状元素](http://demo.cssworld.cn/12/2-3.php)
 > 3．可以使用 text-align:center 实现[图片垂直居中](http://demo.cssworld.cn/12/2-4.php)
 > 4．可以使用 text-indent 实现[文字下沉效果](http://demo.cssworld.cn/12/2-5.php)
+> 5．可以实现全兼容的 icon fonts [图标的旋转效果](http://demo.cssworld.cn/12/2-6.php)
+> 6．充分利用高度的高度自适应布局
