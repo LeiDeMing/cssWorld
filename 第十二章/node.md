@@ -44,3 +44,8 @@
 > + 2．需要关注的 writing-mode 属性值
 
 #### writing-mode 不经意改变了哪些规则
+> 1．水平方向也能 margin 合并(换句话说，如果元素是默认的水平流，则垂直 margin会合并；如果元素是垂直流，则水平 margin 会合并)[demo](http://demo.cssworld.cn/12/2-1.php)
+> 2．普通块元素可以使用 margin:auto 实现垂直居中
+> + [（1）图片元素](http://demo.cssworld.cn/12/2-2.php)
+> + [（2）普通块状元素](http://demo.cssworld.cn/12/2-3.php)
+> 3．可以使用 text-align:center 实现图片垂直居中
