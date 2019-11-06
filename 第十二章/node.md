@@ -25,3 +25,11 @@
 > 对了，还有一个小点值得一提。在不支持 text-align:start/end 的浏览器中（如 IE），不同的 direction 属性值会改变 text-align 属性的初始值：当 direction 值为 ltr 的时候，text-align 的初始值是 left；当 direction 值为 rtl 的时候，text-align 的初始值是 right。
 
 #### direction 的黄金搭档 unicode-bidi
+> 单看 unicode-bidi 的名称，你可能会觉得有点儿怪，会觉得它可能是哪个浏览器私有的属性，实际上不是的，unicode-bidi 是一个所有浏览器都支持的良好的 CSS 属性。至于它为什么会有这么奇怪的名称，我这里解释一下，你可以把 unicode 理解为“字符集”， 而 bidi 则是单词 bidirectionality 的简写，中文意思是“双向性”。网页中的字符很多时候是混合的，例如中文和英文夹杂，或者阿拉伯文和英文夹杂，此时就会出现文本阅读方向不一样的情况，阿拉伯文是从右往左读，英文是从左往右，而这种混合方向同时出现的现象就称为“双向性”，因此 unicode-bidi 作用就是明确字符出现“双向性”时应当有的表现。
+> unicode-bidi 兼容性比较好的几个属性值如下：[demo](http://demo.cssworld.cn/12/1-4.php)
+
+    unicode-bidi: normal; // 默认值
+    unicode-bidi: embed; 
+    unicode-bidi: bidi-override;
+
+#### 改变 CSS 世界纵横规则的 writing-mode
