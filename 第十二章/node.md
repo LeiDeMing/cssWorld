@@ -52,3 +52,7 @@
 > 4．可以使用 text-indent 实现[文字下沉效果](http://demo.cssworld.cn/12/2-5.php)
 > 5．可以实现全兼容的 icon fonts [图标的旋转效果](http://demo.cssworld.cn/12/2-6.php)
 > 6．充分利用高度的高度自适应布局
+
+#### writing-mode 和 direction 的关系
+> writing-mode、direction 和 unicode-bidi 是 CSS 世界中三大可以改变文本布局流向的属性，其中 direction 和 unicode-bidi 属于近亲，经常一起使用，也是仅有的两个不受 CSS3 的 all 属性影响的 CSS 属性，基本上就是和内联元素一起使用。它貌似是为阿拉伯文字设计的
+> 乍一看，writing-mode 似乎包含了 direction 和 unicode-bidi 的某些功能和行为，例如，vertical-rl 的 rl 和 direction 的 rtl 值有相似之处，都是从右往左。然而，实际上两者是没有交集的。因为 vertical-rl 此时的文档流为垂直方向，rl 表示水平方向，此时再设置 direction:rtl，实际上值 rtl 改变的是垂直方向的内联元素的文本方向，一横一纵，没有交集。而且 writing-mode 可以对块状元素产生影响，直接改变了 CSS 世界的纵横规则，要比 direction 强大得多。它貌似是为东亚文字设计的。
