@@ -48,4 +48,5 @@
 > 2．普通块元素可以使用 margin:auto 实现垂直居中
 > + [（1）图片元素](http://demo.cssworld.cn/12/2-2.php)
 > + [（2）普通块状元素](http://demo.cssworld.cn/12/2-3.php)
-> 3．可以使用 text-align:center 实现图片垂直居中
+> 3．可以使用 text-align:center 实现[图片垂直居中](http://demo.cssworld.cn/12/2-4.php)
+> 4．可以使用 text-indent 实现[文字下沉效果](http://demo.cssworld.cn/12/2-5.php)
