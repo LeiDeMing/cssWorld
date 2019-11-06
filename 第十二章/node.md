@@ -1,3 +1,27 @@
 ## 流向的改变
 
 ### 改变水平流向的 direction
+
+#### direction 简介
+> 基本上，大家只要关心下面这两个属性值就好了：
+
+    direction: ltr; // 默认值
+    direction: rtl;
+
+> 但是，Web 开发接触多语言的场景其实非常有限，但这其实并不妨碍 direction 属性在实际项目中的应用，因为 direction 改变水平流向的特性在网页布局的时候非常有用。
+> 当然，direction 属性的作用远不止这些。通常，我们让单行文字溢出用点显示，这个点通常都是在右边的，省略的都是最后的文字，配合 direction 属性，我们可以让这个点打在开头，让前面的文字省略，CSS 和 HTML 代码如下：[demo](http://demo.cssworld.cn/12/1-2.php)
+
+    .ell { 
+        width: 240px; 
+        white-space: nowrap; 
+        text-overflow: ellipsis; 
+        overflow: hidden; 
+    } 
+    <p class="ell" dir="ltr">开头是我，这是中间，然后就是结束</p> 
+    <p class="ell" dir="rtl">开头是我，这是中间，然后就是结束</p>
+
+> direction 属性还可以轻松改变表格中列的呈现顺序
+> directionL:rtl 还可以让 text-justify 两端对齐元素，最后一行落单的元素右对齐显示。[demo](http://demo.cssworld.cn/12/1-3.php)
+> 对了，还有一个小点值得一提。在不支持 text-align:start/end 的浏览器中（如 IE），不同的 direction 属性值会改变 text-align 属性的初始值：当 direction 值为 ltr 的时候，text-align 的初始值是 left；当 direction 值为 rtl 的时候，text-align 的初始值是 right。
+
+#### direction 的黄金搭档 unicode-bidi
