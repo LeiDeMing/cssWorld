@@ -72,6 +72,14 @@
 ### 改变 width/height 作用细节的 box-sizing
 > box-sizing 就是改变尺寸作用规则的
 
+    .box1 { box-sizing: content-box; } /* 默认值 */ 
+    .box2 { box-sizing: padding-box; } /* Firefox 曾经支持 */ 
+    .box3 { box-sizing: border-box; } /* 全线支持 */ 
+    .box4 { box-sizing: margin-box; } /* 从未支持过 */
+> 为何 box-sizing 不支持 margin-box
+> + 我个人认为，不支持 margin-box 最大的原因是它本身就没有价值！我们不妨好好想想，一个元素，如果我们使用 width 或 height 设定好了尺寸，请问，我们此时设置 margin值，其 offset 尺寸会有变化吗？不会啊，100 像素宽的元素，再怎么设置 margin，它还是 100 像素宽。但是，border 和 padding 就不一样了，100 像素宽的元素，设置个 20 像素大小的 padding 值，offsetWidth 就是 140 像素了，尺寸会变化。你说，一个本身并不会改变元素尺寸的盒子，它有让 box-sizing 支持的道理吗？box-sizing 就是改变尺寸作用规则的！margin 只有在 width 为 auto 的时候可以改变元素的尺寸，但是，此时元素已经处于流动性状态，根本就不需要 box-sizing。所以，说来说去就是 margin-box本身就没有价值
+> + 另外一个原因牵扯到语义。如果 box-sizing 开了先河支持了 margin-box，margin box 就变成了一个“显式的盒子”，你让background-origin等属性何去何从，支持还是不支持呢？“margin的背景永远是透明的”这几个大字可是在规范写得清清楚楚，难道让背景色在所谓的 margin box 中也显示？
+
 #### 如何评价*{box-sizing:border-box}
 + （1）这种做法易产生没必要的消耗
 + （2）这种做法并不能解决所有问题
