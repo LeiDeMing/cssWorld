@@ -38,8 +38,8 @@
 > 如何快速判断一个元素使用的是否为“内部尺寸”呢？很简单，假如这个元素里面没有内容，宽度就是 0，那就是应用的“内部尺寸”
 + （1）包裹性
 + > “包裹性”对实际开发有什么作用呢？请看这个需求：页面某个模块的文字内容是动态的，可能是几个字，也可能是一句话。然后，希望文字少的时候居中显示，文字超过一行的时候居左显示。该如何实现？[如图](https://ws1.sinaimg.cn/large/0060ZzrAgy1gabbasogykj30j704tmxb.jpg)
-+ （2）首选最小宽度
-+ （3）最大宽度-如果内部没有块级元素或者块级元素没有设定宽度值，则“最大宽度”实际上是最大的连续内联盒子(理解为 display 为        inline、inline-block、inline-table 等元素,“连续内联盒子”指的全部都是内联级别的一个或一堆元素，中间没有任何的换行标签<br>或其他块级元素)的宽度
++ （2）[首选最小宽度](http://demo.cssworld.cn/3/2-6.php)
++ （3）最大宽度-如果内部没有块级元素或者块级元素没有设定宽度值，则“最大宽度”实际上是最大的连续内联盒子(理解为 display 为inline、inline-block、inline-table 等元素,“连续内联盒子”指的全部都是内联级别的一个或一堆元素，中间没有任何的换行标签\<br>或其他块级元素)的宽度
 + 除了 inline-block 元素，浮动元素以及绝对定位元素都具有包裹性，均有类似的智能宽度行为
 
 
@@ -54,6 +54,8 @@
 
 ### width 值作用的细节
 + “内在盒子”又被分成了 4 个盒子，分别是 content box、padding box、border box和 margin box
++ [盒尺寸](https://ws1.sinaimg.cn/large/0060ZzrAgy1gabbufq9akj30j608lq46.jpg)
++ 为何唯独 margin box 并没有对应的 CSS 关键字名称呢？因为目前没有任何场景需要用到 margin box。“margin 的背景永远是透明的”，因此不可能作为 backgound-clip 或 backgroundorigin 属性值出现。margin 一旦设定具体宽度和高度值，其本身的尺寸是不会因 margin值变化而变化的，因此作为 box-sizing 的属性值存在也就没有了意义（这会在后面深入阐述）。既然无用武之地，自然就被抛弃了
 
 ### CSS 流体布局下的宽度分离原则
 > 所谓“宽度分离原则”，就是 CSS 中的 width 属性不与影响宽度的 padding/border（有时候包括 margin）属性共存，也就是不能出现以下的组合
