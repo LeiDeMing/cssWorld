@@ -26,6 +26,17 @@
     img { display: block; }
     \<img src="1.jpg">
 
++ 3.2 CSS 世界中的替换元素的固有尺寸有一个很重要的特性，那就是“我们是无法改变这个替换元素内容的固有尺寸的”。例如，如果有下面的代码
+
+    div:before { 
+        content: url(1.jpg); 
+        display: block; 
+        width: 200px; height: 200px; 
+    }
+
+> 很多人会按照经验认为是 200 像素×200 像素，非也！实际上，这里的图片尺寸是 1.jpg这张图片的原始尺寸大小 256 像素×192 像素，width 和 height 属性都被直接无视了。这就是我上面所说的，在 CSS 世界中，图片资源的固有尺寸是无法改变的！那是因为图片中的 content 替换内容默认的适配方式是填充（fill），也就是外部设定的尺寸多大，我就填满、跟着一样大。换句话说，尺寸变化的本质并不是改变固有尺寸，而是采用了填充作为适配 HTML 尺寸和 CSS 尺寸的方式，且在 CSS3 之前，此适配
+方式是不能修改的。在 CSS3 新世界中，\<img>和其他一些替换元素的替换内容的适配方式可以通过object-fit 属性修改了。例如，\<img>元素的默认声明是 object-fit:fill，如果我们设置 object-fit:none，则我们图片的尺寸就完全不受控制，表现会和非替换元素::before生成的图片尺寸类似；如果我们设置 object-fit:contain，则图片会以保持比例图片，尽可能利用 HTML 尺寸但又不会超出的方式显示，有些类似于 background-size:contain的呈现原理，如果此时我们设定\<img>元素的 width 和 height 都是 200 像素，则会呈现[图4-6](https://ws1.sinaimg.cn/large/0060ZzrAgy1gaewd60uhwj30l607z0y5.jpg) 所示的自动垂直居中效果。[object-fit](https://www.zhangxinxu.com/wordpress/2015/03/css3-object-position-object-fit/)
+
 + 4．替换元素和非替换元素的距离有多远
 > + 观点 1：替换元素和非替换元素之间只隔了一个 src 属性
 > + 观点 2：替换元素和非替换元素之间只隔了一个 CSS content 属性
