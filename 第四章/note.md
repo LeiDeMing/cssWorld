@@ -19,6 +19,12 @@
 > + 固有尺寸指的是替换内容原本的尺寸
 > + HTML 尺寸这个概念略微抽象，我们不妨将其想象成水煮蛋里面的那一层白色的膜，里面是“固有尺寸”这个蛋黄蛋白，外面是“CSS 尺寸”这个蛋壳。“HTML 尺寸”只能通过HTML 原生属性改变，这些 HTML 原生属性包括img的 width 和 height 属性、input的 size 属性、textarea的 cols 和 rows 属性等
 > + （3）CSS 尺寸特指可以通过 CSS 的 width 和 height 或者 max-width/min-width 和max-height/min-height 设置的尺寸，对应盒尺寸中的 content box。
+> + 可以影响替换元素尺寸的 3 层结构如图 4-1 所示。这 3 层结构的计算规则具体如下。(见书P48)
+
++ 3.1 内联替换元素和块级替换元素使用上面同一套尺寸计算规则。例如：
+
+    img { display: block; }
+    \<img src="1.jpg">
 
 + 4．替换元素和非替换元素的距离有多远
 > + 观点 1：替换元素和非替换元素之间只隔了一个 src 属性
