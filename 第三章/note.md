@@ -7,8 +7,7 @@
 > 实际开发时，我们要么使用 block，要么使用table，并不会使用 list-item，主要有 3 个原因。
 > + （1）1 个字符的比较多，其他都是 5 个字符。
 > + （2）会出现不需要的项目符号，如图 3-2 箭头所示。这其实并不是什么大问题，再加一行 list-style: none 声明就可以了。
-> + （3）IE 浏览器不支持伪元素的 display 值为 listitem。这是不使用 display:list-item 清除浮动的主因，兼容性不好。对于 IE 浏览器（包括 IE11），普通元
-素设置 display:list-item 有效，但是 :before /:after 伪元素就不行。
+> + （3）IE 浏览器不支持伪元素的 display 值为 list-item。这是不使用 display:list-item 清除浮动的主因，兼容性不好。对于 IE 浏览器（包括 IE11），普通元素设置 display:list-item 有效，但是 :before /:after 伪元素就不行。
 + 正是由于“块级元素”具有换行特性，因此理论上它都可以配合 clear 属性来清除浮动带来的影响(清除浮动原理？)
     
     .clear:after { 
