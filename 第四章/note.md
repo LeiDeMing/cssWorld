@@ -534,7 +534,7 @@ table-cell 布局，左右两栏作为单元格处理，或者使用 border 边�
 
 #### border 与透明边框技巧
 > 虽然 color:transparent 在 IE9 以上版本的浏览器才支持，但是 border-color: transparent 在 IE7 浏览器就开始支持了，于是，我们解决一些棘手问题的思路就更加开阔了。
-+ 1．右下方 background 定位的技巧。假设现在有一个宽度不固定的元素，我们需要在距离右边缘 50 像素的位置设置一个背景图片，此时 background 属性就遭遇尴尬了：由于宽度不固定，所以无法通过设定具体数值来实现我们想要的效果，因为 background 是相对左上角定位的，我们的需求是右侧定位。要实现上面的需求，方法挺多。其中一种方法就是使用透明边框，如下 CSS 代码：此时，对 50px 的间距我们使用 transparent 边框表示，这样就可以使用百分比 backgroundposition 定位到我们想要的位置了。因为，默认 background 背景图片是相对于 padding box定位的，也就是说，background-position:100%的位置计算默认是不会把 border-width计算在内的。
++ 1．右下方 background 定位的技巧。假设现在有一个宽度不固定的元素，我们需要在距离右边缘 50 像素的位置设置一个背景图片，此时 background 属性就遭遇尴尬了：由于宽度不固定，所以无法通过设定具体数值来实现我们想要的效果，因为 background 是相对左上角定位的，我们的需求是右侧定位。要实现上面的需求，方法挺多。其中一种方法就是使用透明边框，如下 CSS 代码：此时，对 50px 的间距我们使用 transparent 边框表示，这样就可以使用百分比 background-position 定位到我们想要的位置了。因为，默认 background 背景图片是相对于 padding box定位的，也就是说，background-position:100%的位置计算默认是不会把 border-width计算在内的。
 
     .box { 
         border-right: 50px solid transparent; 
@@ -557,8 +557,8 @@ table-cell 布局，左右两栏作为单元格处理，或者使用 border 边�
     div { 
         width: 0; 
         border: 10px solid; 
-    border-color: #f30 transparent transparent; 
-}
+        border-color: #f30 transparent transparent; 
+    }
 
 #### border 与图形构建
 > border 属性可以轻松实现兼容性非常好的三角图形效果，为什么可以呢？其底层原因受inset/outset 等看上去没有实用价值的 border-style 属性影响，边框 3D 效果在互联网早期其实还是挺潮的，那个时候人们喜欢有质感的东西，为了呈现逼真的 3D 效果，自然在边框转角的地方一定要等分平滑处理，然后不同的方向赋予不同的颜色。然后，这一转角规则也被 solid类型的边框给沿用了。因此，我们就不难理解下面的 4 色边框的表现了：
