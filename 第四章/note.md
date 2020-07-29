@@ -11,7 +11,7 @@
 
 + 2．替换元素的默认 display 值
 > + [各个替换元素的默认display属性值](http://ww1.sinaimg.cn/large/0060ZzrAgy1g7hbl4rt4wj30lw09e753.jpg)
-> +     <input type="button" value="按钮"><button type="button">按钮</button>，在 Firefox 下，前者的 display 属性默认值是 inline，后者却是 inline-block，很自然会奇怪明明一个模子里出来的，怎么会有这个区别呢？<input>和<button>按钮的区别在什么地方？区别在于两种按钮默认的 white-space 值不一样，前者是 pre，后者是 normal，所表示出来的现象差异就是：当按钮文字足够多的时候，<input>按钮不会自动换行，<button>按钮则会
+> +     <input type="button" value="按钮"><button type="button">按钮</button>，在 Firefox 下，前者的 display 属性默认值是 inline，后者却是 inline-block，很自然会奇怪明明一个模子里出来的，怎么会有这个区别呢？<input>和<button>按钮的区别在什么地方？区别在于两种按钮默认的 white-space 值不一样，前者是 pre，后者是 normal，所表示出来的现象差异就是：当按钮文字足够多的时候，<input>按钮不会自动换行，<button>按钮则会换行
 > + 替换元素的 display 是 inline、block和 inline-block 中的任意一个，其尺寸计算规则都是一样的。
 
 + 3．替换元素的尺寸计算规则
