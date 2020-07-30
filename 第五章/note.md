@@ -9,7 +9,7 @@
 
 #### 字母 x 与 CSS 中的 x-height
 > CSS 中有一个概念叫作 x-height，指的是字母 x 的高度,通俗地讲，x-height 指的就是小写字母 x 的高度，术语描述就是基线和等分线（mean line）（也称作中线，midline）之间的距离
-> 最典型的代表就是 verticalalign:middle。这里的 middle 是中间的意思。注意，跟上面的 median（中线）不是一个意思,我们可以近似理解为字母 x 交叉点那个位置
+> 最典型的代表就是 vertical-align:middle。这里的 middle 是中间的意思。注意，跟上面的 median（中线）不是一个意思,我们可以近似理解为字母 x 交叉点那个位置
 > 对于内联元素垂直居中应该是对文字，而非居外部的块级容器所
 
 #### 字母 x 与 CSS 中的 ex
@@ -139,10 +139,10 @@
 > + 一是其兼容性非常好
 > + 二是其可以精确控制内联元素的垂直对齐位置
 > + [demo](http://demo.cssworld.cn/5/3-3.php)
-> 在 CSS 世界中，凡是百分比值，均是需要一个相对计算的值，例如，margin 和 padding是相对于宽度计算的，line-height 是相对于 font-size 计算的，而这里的 verticalalign 属性的百分比值则是相对于 line-height 的计算值计算的
+> 在 CSS 世界中，凡是百分比值，均是需要一个相对计算的值，例如，margin 和 padding是相对于宽度计算的，line-height 是相对于 font-size 计算的，而这里的 vertical-align 属性的百分比值则是相对于 line-height 的计算值计算的
 
 #### vertical-align 作用的前提
-> 只能应用于内联元素以及 display 值为 table-cell 的元素,换句话说，vertical-align 属性只能作用在 display 计算值为 inline、inlineblock，inline-table 或 table-cell 的元素上
+> 只能应用于内联元素以及 display 值为 table-cell 的元素,换句话说，vertical-align 属性只能作用在 display 计算值为 inline、inline-block，inline-table 或 table-cell 的元素上
 > 因此，默认情况下，\<span>、\<strong>、\<em>等内联元素，\<img>、\<button>、\<input>等替换元素，非 HTML 规范的自定义标签元素，以及\<td>单元格，都是支持 vertical-align 属性的，其他块级元素则不支持
 > CSS 世界中，有一些 CSS 属性值会在背后默默地改变元素 display 属性的计算值，从而导致 vertical-align 不起作用
 > 下面这种情况:
