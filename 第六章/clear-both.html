@@ -1,0 +1,44 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-08-03 09:56:51
+ * @LastEditTime: 2020-08-03 09:57:10
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \cssWorld\第六章\clear-both.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .father:after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+
+        .father img {
+            float: left;
+            width: 60px;
+            height: 64px;
+        }
+
+        .father+div {
+            margin-top: -2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="father">
+        <img src="zxx.jpg">
+        我是帅哥，好巧啊，我也是帅哥，原来看这本书的人都是帅哥~
+    </div>
+    <div>虽然你很帅，但是我对你不感兴趣。</div>
+
+</body>
+
+</html>
