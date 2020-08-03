@@ -75,9 +75,9 @@
 > 假设 HTML 结构如下：
 
     <div class="box"> 
-    <a href class="prev">&laquo; 上一章</a> 
-    <a href class="next">下一章 &raquo;</a> 
-    <h3 class="title">第 112 章 动物环绕</h3> 
+        <a href class="prev">&laquo; 上一章</a> 
+        <a href class="next">下一章 &raquo;</a> 
+        <h3 class="title">第 112 章 动物环绕</h3> 
     </div>
 
 > 则 CSS 可以如下：
