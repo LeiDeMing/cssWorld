@@ -550,7 +550,7 @@ border-width 和普通书写的属性。
 > + 所有背景相关属性；
 > + text-decoration、text-transfor、letter-spacing、word-spacing、
 line-height 和 vertical-align 等属性。
-> :first-line 和:first-letter 伪元素一样，color 等继承属性的权重总是多了一层，毕竟称为“伪元素”，就好像里面还有个子元素。如果:first-line 和:firstletter 同时设置颜色，:first-letter 级别比:first-line 高，即使:firstline 至加!important（如果浏览器支持）也是如此
+> :first-line 和:first-letter 伪元素一样，color 等继承属性的权重总是多了一层，毕竟称为“伪元素”，就好像里面还有个子元素。如果:first-line 和:first-letter 同时设置颜色，:first-letter 级别比:first-line 高，即使:first-line 至加!important（如果浏览器支持）也是如此
 > :first-line 和:first-letter 伪元素一样，也支持标签嵌套，但是具体细则和:first-letter 出入较大，例如，它不支持 table 相关属性等
 > [demo](http://demo.cssworld.cn/8/7-2.php)
 > 因此，如果想使用:first-line，首行内容不能混入 inline-block/inline-table 元素
