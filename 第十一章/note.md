@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-05 12:25:13
- * @LastEditTime: 2020-08-11 15:18:17
+ * @LastEditTime: 2020-08-11 15:21:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \cssWorld\第十一章\note.md
@@ -18,7 +18,7 @@
 #### 真正的不占据空间的 outline 及其应用
 > outline 是本书介绍到现在出现的第一个真正意义上的不占据任何空间的属性
 > 用于实现一些看似棘手的布局效果
-> + 1．案例一：头像剪裁的矩形镂空效果[demo](http://demo.cssworld.cn/ 11/1-1.php)
+> + 1．案例一：头像剪裁的矩形镂空效果[demo](http://demo.cssworld.cn/11/1-1.php)
 > + 2．案例二：自动填满屏幕剩余空间的应用技巧
 
 ### 光标属性 cursor
