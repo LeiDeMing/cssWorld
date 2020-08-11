@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-11-05 12:25:13
+ * @LastEditTime: 2020-08-11 15:18:17
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \cssWorld\第十一章\note.md
+-->
 ## 用户界面样式
 > 用户界面样式指的是 CSS 世界中用来帮助用户进行界面交互的一些 CSS 样式，主要有outline 和 cursor 等属性。
 
@@ -5,7 +13,6 @@
 > outline 表示元素的轮廓，语法和 border 属性非常类似，分宽度、类型和颜色，支持的关键字和属性值与 border 属性一模一样,两者表现也类似，都是给元素的外面画框。但是，设计的作用却大相径庭。
 
 #### 万万不可在全局设置 outline:0 none
-> 好在所有的浏览器原生就有键盘访问网页的能力，对于按钮或者链接，通常的键盘操作是：Tab 键按次序不断 focus 控件元素，包括链接、按钮、输入框等表单元素，或者 focus 设置了 tabindex 的普通元素，按 Shift+Tab 组合键反方向访问
 > 好在所有的浏览器原生就有键盘访问网页的能力，对于按钮或者链接，通常的键盘操作是：Tab 键按次序不断 focus 控件元素，包括链接、按钮、输入框等表单元素，或者 focus 设置了 tabindex 的普通元素，按 Shift+Tab 组合键反方向访问
 
 #### 真正的不占据空间的 outline 及其应用
